@@ -7,8 +7,17 @@ import {
   SignUpPage,
   LogInPage,
   ForgotPasswordPage,
+  Books,
+  EditBookPage,
+  NewBookPage,
+  UserPage,
+  ReviewPage,
+  BookLandingPage,
+  Profile,
+  Borrow,
 } from "../pages";
-import DefaultLayout from "../components/layout/DefaultLayout";
+import { DefaultLayout } from "../components/layout/DefaultLayout ";
+import { UserLayout } from "../components/layout/UserLayout";
 
 const AppRoutes = () => {
   return (
@@ -22,7 +31,18 @@ const AppRoutes = () => {
       </Route>
 
       {/* PRIVATE PAGES  */}
-      <Route path="/user" element={<Dashboard />} />
+
+      <Route path="/user" element={<UserLayout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="books" element={<Books />} />
+        <Route path="new-book" element={<NewBookPage />} />
+        <Route path="edit-book" element={<EditBookPage />} />
+        <Route path="book-landing" element={<BookLandingPage />} />
+        <Route path="reviews" element={<ReviewPage />} />
+        <Route path="all" element={<UserPage />} />
+        <Route path="borrow" element={<Borrow />} />
+        <Route path="profile" element={<Profile />} />
+      </Route>
     </Routes>
   );
 };
