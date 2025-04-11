@@ -1,3 +1,8 @@
 .main {
   min-height: 81vh;
 }
+
+.navbar-logo {
+  height: 40px;
+  transform: scale(1.9); /* Scales visually without affecting layout */
+}
