@@ -4,10 +4,11 @@ import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import { SideBar } from "./SideBar";
+import AuthRoute from "../auth/AuthRoute";
 
 export const UserLayout = () => {
   return (
-    <div>
+    <AuthRoute>
       {/* NavBAR */}
       <Header />
 
@@ -32,6 +33,6 @@ export const UserLayout = () => {
 
       {/* Footer */}
       <Footer />
-    </div>
+    </AuthRoute>
   );
 };
