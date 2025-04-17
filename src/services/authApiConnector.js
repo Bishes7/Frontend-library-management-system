@@ -10,7 +10,9 @@ export const signUpApi = async (payload) => {
     url: authApi + "/register",
     method: "post",
     payload,
+    showToast: true,
   };
   const result = await apiConnector(obj);
   console.log(result);
+  return result;
 };

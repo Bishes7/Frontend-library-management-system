@@ -7,9 +7,16 @@ import useForm from "../../hooks/useForm";
 import { signUpApi } from "../../services/authApiConnector";
 
 const SignUpPage = () => {
-  const initialState = {};
+  const initialState = {
+    fName: "",
+    lName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
 
-  const { form, setForm, handleOnChange } = useForm(initialState); // destrucutured useFOrm hook
+  const { form, setForm, handleOnChange, passwordErrors } =
+    useForm(initialState); // destrucutured useFOrm hook
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -20,8 +27,9 @@ const SignUpPage = () => {
 
     const result = await signUpApi(rest);
     console.log(result);
-  };
 
+    result.status === "success" && setForm(initialState);
+  };
   return (
     <div className="d-flex justify-content-center">
       <Form
@@ -33,10 +41,26 @@ const SignUpPage = () => {
         <hr />
 
         {inputTemplate.map((input) => (
-          <CustomInput key={input.name} {...input} onChange={handleOnChange} />
+          <CustomInput
+            key={input.name}
+            {...input}
+            value={form[input.name]}
+            onChange={handleOnChange}
+          />
         ))}
 
-        <Button variant="primary" type="submit">
+        <div className="py-3">
+          <ul className="text-danger">
+            {passwordErrors.length > 0 &&
+              passwordErrors.map((message) => <li key={message}>{message}</li>)}
+          </ul>
+        </div>
+
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={passwordErrors.length}
+        >
           Submit
         </Button>
       </Form>
