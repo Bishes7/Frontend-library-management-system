@@ -3,6 +3,7 @@ export { default as Dashboard } from "./dashboard/Dashboard.jsx";
 export { default as ForgotPasswordPage } from "./auth/ForgotPasswordPage.jsx";
 export { default as LogInPage } from "./auth/LogInPage.jsx";
 export { default as SignUpPage } from "./auth/SignUpPage.jsx";
+export { default as VerifyUser } from "./auth/VerifyUser.jsx";
 export { default as BookLandingPage } from "./books/BookLandingPage.jsx";
 export { default as Books } from "./books/Books.jsx";
 export { default as NewBookPage } from "./books/NewBookPage.jsx";
