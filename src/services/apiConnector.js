@@ -20,6 +20,11 @@ export const apiConnector = async ({ url, method, payload, showToast }) => {
   } catch (error) {
     console.log(error);
     const message = error?.response?.data?.message || error.message;
-    toast.error(message);
+    showToast && toast.error(message);
+
+    return {
+      status: "error",
+      message: message,
+    };
   }
 };
