@@ -6,3 +6,11 @@
   height: 40px;
   transform: scale(1.9); /* Scales visually without affecting layout */
 }
+
+/* Login Page */
+.login {
+  min-height: 100vh;
+
+  background: url(./assets/pic2.jpg) center no-repeat;
+  background-size: cover;
+}
