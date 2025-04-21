@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import { Button, Card, Form } from "react-bootstrap";
 import CustomInput from "../../components/custominput/CustomInput";
-import useForm from "../../hooks/useForm";
 
 const LogInPage = () => {
-  const initialState = {};
-  const { form, handleOnChange } = useForm(initialState);
+  // Using useRef to grab the input value
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const handleOnSubmit = (e) => {
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
     e.preventDefault();
-    console.log(form);
+    console.log({ email, password });
   };
   return (
     <div className="login d-flex justify-content-center align-items-center">
@@ -27,7 +29,7 @@ const LogInPage = () => {
               type="email"
               placeholder="something@gmail.com"
               required
-              onChange={handleOnChange}
+              ref={emailRef}
             />
             <CustomInput
               label="Password"
@@ -35,7 +37,7 @@ const LogInPage = () => {
               name="password"
               placeholder="*******"
               required
-              onChange={handleOnChange}
+              ref={passwordRef}
             />
             <div className="d-grid">
               <Button type="submit" variant="info">
