@@ -28,3 +28,16 @@ export const activateUserApi = async (payload) => {
   };
   return apiConnector(obj);
 };
+
+// Log IN User
+
+export const logInUser = async (payload) => {
+  const obj = {
+    method: "post",
+    url: authApi + "/login",
+    payload,
+    showToast: true,
+  };
+
+  return apiConnector(obj);
+};

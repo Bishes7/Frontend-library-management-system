@@ -2,16 +2,31 @@ import React, { useRef } from "react";
 
 import { Button, Card, Form } from "react-bootstrap";
 import CustomInput from "../../components/custominput/CustomInput";
+import { logInUser } from "../../services/authApiConnector";
+import { toast } from "react-toastify";
 
 const LogInPage = () => {
   // Using useRef to grab the input value
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    e.preventDefault();
+
+    if (email && password) {
+      const { payload } = await logInUser({ email, password });
+
+      // Storing tokens in the browser storage
+      localStorage.setItem("refreshJWT", payload.refreshJWT);
+      sessionStorage.setItem("accessJWT", payload.accessJWT);
+
+      // Redirect users to the dashboard
+    } else {
+      toast("Both inputs are required");
+    }
+
     console.log({ email, password });
   };
   return (
