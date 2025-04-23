@@ -4,6 +4,7 @@ import { Button, Card, Form } from "react-bootstrap";
 import CustomInput from "../../components/custominput/CustomInput";
 import { logInUser } from "../../services/authApiConnector";
 import { toast } from "react-toastify";
+import { fetchUserApi } from "../../features/user/userApi";
 
 const LogInPage = () => {
   // Using useRef to grab the input value
@@ -18,9 +19,15 @@ const LogInPage = () => {
     if (email && password) {
       const { payload } = await logInUser({ email, password });
 
-      // Storing tokens in the browser storage
-      localStorage.setItem("refreshJWT", payload.refreshJWT);
-      sessionStorage.setItem("accessJWT", payload.accessJWT);
+      if (payload?.accessJWT) {
+        // Storing tokens in the browser storage
+        localStorage.setItem("refreshJWT", payload.refreshJWT);
+        sessionStorage.setItem("accessJWT", payload.accessJWT);
+      }
+
+      // call API to get userProfile
+      const userInfo = await fetchUserApi();
+      console.log(userInfo);
 
       // Redirect users to the dashboard
     } else {

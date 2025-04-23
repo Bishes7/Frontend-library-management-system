@@ -1,11 +1,29 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-export const apiConnector = async ({ url, method, payload, showToast }) => {
+
+const getAccessJWT = () => {
+  return sessionStorage.getItem("accessJWT");
+};
+
+export const apiConnector = async ({
+  url,
+  method,
+  payload,
+  showToast,
+  isPrivateRoute,
+}) => {
   try {
+    const headers = {};
+
+    if (isPrivateRoute) {
+      headers.authorization = "bearer " + getAccessJWT();
+    }
+
     const responsePending = axios({
       method,
       url,
       data: payload,
+      headers,
     });
 
     if (showToast) {
