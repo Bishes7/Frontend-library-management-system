@@ -4,9 +4,12 @@ import { Button, Card, Form } from "react-bootstrap";
 import CustomInput from "../../components/custominput/CustomInput";
 import { logInUser } from "../../services/authApiConnector";
 import { toast } from "react-toastify";
-import { fetchUserApi } from "../../features/user/userApi";
+
+import { fetchUserAction } from "../../features/user/userAction";
+import { useDispatch } from "react-redux";
 
 const LogInPage = () => {
+  const dispatch = useDispatch();
   // Using useRef to grab the input value
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -25,9 +28,8 @@ const LogInPage = () => {
         sessionStorage.setItem("accessJWT", payload.accessJWT);
       }
 
-      // call API to get userProfile
-      const userInfo = await fetchUserApi();
-      console.log(userInfo);
+      // call api to fetch user data
+      dispatch(fetchUserAction());
 
       // Redirect users to the dashboard
     } else {
