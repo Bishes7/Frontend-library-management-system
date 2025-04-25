@@ -6,8 +6,12 @@ import { IoHome } from "react-icons/io5";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { BiLogIn } from "react-icons/bi";
 import logo from "../../assets/library.png";
+import { useSelector } from "react-redux";
+import { MdDashboard } from "react-icons/md";
+import { IoLogOut } from "react-icons/io5";
 
 export const Header = () => {
+  const { user } = useSelector((state) => state.userInfo);
   return (
     <Navbar expand="md" className="bg-dark fw-bold" variant="dark">
       <Container>
@@ -21,14 +25,30 @@ export const Header = () => {
             <Link className="nav-link" to="/">
               <IoHome /> Home
             </Link>
-            <Link className="nav-link" to="/signup">
-              <SiGnuprivacyguard />
-              SignUP
-            </Link>
-            <Link className="nav-link" to="/login">
-              <BiLogIn />
-              LogIN
-            </Link>
+
+            {user?._id ? (
+              <>
+                {" "}
+                <Link className="nav-link" to="/user">
+                  <MdDashboard /> Dashboard
+                </Link>
+                <Link className="nav-link" to="/">
+                  <IoLogOut />
+                  Logout
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link className="nav-link" to="/signup">
+                  <SiGnuprivacyguard />
+                  SignUP
+                </Link>
+                <Link className="nav-link" to="/login">
+                  <BiLogIn />
+                  LogIN
+                </Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

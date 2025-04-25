@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { Button, Card, Form } from "react-bootstrap";
 import CustomInput from "../../components/custominput/CustomInput";
@@ -6,10 +6,23 @@ import { logInUser } from "../../services/authApiConnector";
 import { toast } from "react-toastify";
 
 import { fetchUserAction } from "../../features/user/userAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LogInPage = () => {
+  // Using  dispatch to update the state
   const dispatch = useDispatch();
+
+  // using useSelector to read the data from the state
+  const { user } = useSelector((state) => state.userInfo);
+
+  const navigate = useNavigate();
+
+  // check if the user have id
+  useEffect(() => {
+    user?._id && navigate("/user");
+  }, [user?._id, navigate]);
+
   // Using useRef to grab the input value
   const emailRef = useRef();
   const passwordRef = useRef();
