@@ -5,7 +5,7 @@ import CustomInput from "../../components/custominput/CustomInput";
 import { logInUser } from "../../services/authApiConnector";
 import { toast } from "react-toastify";
 
-import { fetchUserAction } from "../../features/user/userAction";
+import { autoLogin, fetchUserAction } from "../../features/user/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -20,8 +20,8 @@ const LogInPage = () => {
 
   // check if the user have id
   useEffect(() => {
-    user?._id && navigate("/user");
-  }, [user?._id, navigate]);
+    user?._id ? navigate("/user") : dispatch(autoLogin());
+  }, [user?._id, navigate, dispatch]);
 
   // Using useRef to grab the input value
   const emailRef = useRef();
