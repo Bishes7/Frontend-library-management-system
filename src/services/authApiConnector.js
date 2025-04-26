@@ -41,3 +41,15 @@ export const logInUser = async (payload) => {
 
   return apiConnector(obj);
 };
+
+// Request new accessJWT
+
+export const getaccessJWT = async () => {
+  const obj = {
+    method: "get",
+    url: authApi + "/renew-jwt",
+    isPrivateRoute: true,
+    isRefreshJWT: true,
+  };
+  return apiConnector(obj);
+};

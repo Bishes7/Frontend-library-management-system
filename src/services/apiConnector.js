@@ -1,8 +1,14 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
+// getting excessJWT
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
+};
+
+// getting
+const getRefreshJWT = () => {
+  return localStorage.getItem("refreshJWT");
 };
 
 export const apiConnector = async ({
@@ -11,12 +17,14 @@ export const apiConnector = async ({
   payload,
   showToast,
   isPrivateRoute,
+  isRefreshJWT,
 }) => {
   try {
     const headers = {};
 
     if (isPrivateRoute) {
-      headers.authorization = "bearer " + getAccessJWT();
+      const token = isRefreshJWT ? getRefreshJWT() : getAccessJWT();
+      headers.authorization = "bearer " + token;
     }
 
     const responsePending = axios({
