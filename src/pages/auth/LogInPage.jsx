@@ -17,7 +17,8 @@ const LogInPage = () => {
   const { user } = useSelector((state) => state.userInfo);
 
   const navigate = useNavigate();
-  const loaderRef = useRef(true);
+
+  const [loader, setLoader] = React.useState(true);
 
   // check if the user have id
   useEffect(() => {
@@ -28,10 +29,10 @@ const LogInPage = () => {
       localStorage.getItem("refreshJWT")
     ) {
       setTimeout(() => {
-        loaderRef.current = false;
+        setLoader(false);
       }, 2000);
     } else {
-      loaderRef.current = false;
+      setLoader(false);
     }
   }, [user?._id, navigate, dispatch]);
 
@@ -63,7 +64,7 @@ const LogInPage = () => {
   };
   // Implementing quick loader
 
-  if (loaderRef.current) {
+  if (loader) {
     return (
       <div className=" d-flex justify-content-center ">
         <Spinner animation="border" variant="info" />

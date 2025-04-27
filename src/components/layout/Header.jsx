@@ -44,7 +44,7 @@ export const Header = () => {
                 <Link className="nav-link" to="/user">
                   <MdDashboard /> Dashboard
                 </Link>
-                <Link className="nav-link" to="/" onClick={handleOnLogOut}>
+                <Link className="nav-link" onClick={handleOnLogOut}>
                   <IoLogOut />
                   Logout
                 </Link>
