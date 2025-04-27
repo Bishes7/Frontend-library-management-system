@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getaccessJWT } from "./authApiConnector";
 
 // getting excessJWT
 const getAccessJWT = () => {
@@ -47,7 +48,31 @@ export const apiConnector = async ({
     console.log(error);
     const message = error?.response?.data?.message || error.message;
     showToast && toast.error(message);
+    console.log(message);
+    console.log(error);
 
+    // if jwt is expired
+    if (error.status === 401 && message === "jwt expired") {
+      // calling api to get new access jwt
+      const { payload } = await getaccessJWT();
+      console.log(payload);
+
+      if (payload) {
+        sessionStorage.setItem("accessJWT", payload);
+        apiConnector({
+          url,
+          method,
+          payload,
+          showToast,
+          isPrivateRoute,
+          isRefreshJWT,
+        });
+      }
+    } else {
+      // remove both the tokens
+      sessionStorage.removeItem("accessJWT");
+      localStorage.removeItem("refreshJWT");
+    }
     return {
       status: "error",
       message: message,

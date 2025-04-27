@@ -48,8 +48,6 @@ const LogInPage = () => {
     } else {
       toast("Both inputs are required");
     }
-
-    console.log({ email, password });
   };
   return (
     <div className="login d-flex justify-content-center align-items-center">
