@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Form, Spinner } from "react-bootstrap";
 import CustomInput from "../../components/custominput/CustomInput";
 import { logInUser } from "../../services/authApiConnector";
 import { toast } from "react-toastify";
@@ -17,10 +17,22 @@ const LogInPage = () => {
   const { user } = useSelector((state) => state.userInfo);
 
   const navigate = useNavigate();
+  const loaderRef = useRef(true);
 
   // check if the user have id
   useEffect(() => {
     user?._id ? navigate("/user") : dispatch(autoLogin());
+
+    if (
+      sessionStorage.getItem("accessJWT") ||
+      localStorage.getItem("refreshJWT")
+    ) {
+      setTimeout(() => {
+        loaderRef.current = false;
+      }, 2000);
+    } else {
+      loaderRef.current = false;
+    }
   }, [user?._id, navigate, dispatch]);
 
   // Using useRef to grab the input value
@@ -49,6 +61,16 @@ const LogInPage = () => {
       toast("Both inputs are required");
     }
   };
+  // Implementing quick loader
+
+  if (loaderRef.current) {
+    return (
+      <div className=" d-flex justify-content-center ">
+        <Spinner animation="border" variant="info" />
+      </div>
+    );
+  }
+
   return (
     <div className="login d-flex justify-content-center align-items-center">
       <Card style={{ width: "18rem" }}>

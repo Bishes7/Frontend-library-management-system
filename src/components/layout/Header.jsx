@@ -6,12 +6,24 @@ import { IoHome } from "react-icons/io5";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { BiLogIn } from "react-icons/bi";
 import logo from "../../assets/library.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdDashboard } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
+import { logOutAPI } from "../../services/authApiConnector";
+import { setUser } from "../../features/user/userSLice";
 
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+
+  const handleOnLogOut = () => {
+    logOutAPI();
+    sessionStorage.removeItem("accessJWT");
+    localStorage.removeItem("refreshJWT");
+
+    dispatch(setUser({}));
+  };
+
   return (
     <Navbar expand="md" className="bg-dark fw-bold" variant="dark">
       <Container>
@@ -32,7 +44,7 @@ export const Header = () => {
                 <Link className="nav-link" to="/user">
                   <MdDashboard /> Dashboard
                 </Link>
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/" onClick={handleOnLogOut}>
                   <IoLogOut />
                   Logout
                 </Link>

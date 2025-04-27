@@ -59,7 +59,7 @@ export const apiConnector = async ({
 
       if (payload) {
         sessionStorage.setItem("accessJWT", payload);
-        apiConnector({
+        return apiConnector({
           url,
           method,
           payload,

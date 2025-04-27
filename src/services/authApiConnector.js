@@ -53,3 +53,13 @@ export const getaccessJWT = async () => {
   };
   return apiConnector(obj);
 };
+
+// logout user
+export const logOutAPI = async () => {
+  const obj = {
+    url: authApi + "/logout",
+    method: "get",
+    isPrivateRoute: true,
+  };
+  return apiConnector(obj);
+};
