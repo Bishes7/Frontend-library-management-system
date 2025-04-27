@@ -35,11 +35,11 @@ export const apiConnector = async ({
       headers,
     });
 
-    if (showToast) {
-      toast.promise(responsePending, {
-        pending: "Please wait..",
-      });
-    }
+    // if (showToast) {
+    //   toast.promise(responsePending, {
+    //     pending: "Please wait..",
+    //   });
+    // }
     const { data } = await responsePending;
     showToast && toast[data.status](data.message);
 

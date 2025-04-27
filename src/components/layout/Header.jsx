@@ -11,16 +11,25 @@ import { MdDashboard } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
 import { logOutAPI } from "../../services/authApiConnector";
 import { setUser } from "../../features/user/userSLice";
+import { toast } from "react-toastify";
 
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
 
-  const handleOnLogOut = () => {
+  const handleOnLogOut = async () => {
+    const pending = new Promise((resolve) => setTimeout(resolve, 1000)); // 1 second wait
+    toast.promise(pending, {
+      pending: "Logging out...",
+      success: "Logged out successfully!",
+      error: "Logout failed",
+    });
+
+    await pending;
+
     logOutAPI();
     sessionStorage.removeItem("accessJWT");
     localStorage.removeItem("refreshJWT");
-
     dispatch(setUser({}));
   };
 
