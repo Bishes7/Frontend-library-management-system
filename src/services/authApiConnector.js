@@ -14,7 +14,7 @@ export const signUpApi = async (payload) => {
     showToast: true,
   };
   const result = await apiConnector(obj);
-  console.log(result);
+
   return result;
 };
 

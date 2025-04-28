@@ -48,14 +48,11 @@ export const apiConnector = async ({
     console.log(error);
     const message = error?.response?.data?.message || error.message;
     showToast && toast.error(message);
-    console.log(message);
-    console.log(error);
 
     // if jwt is expired
     if (error.status === 401 && message === "jwt expired") {
       // calling api to get new access jwt
       const { payload } = await getaccessJWT();
-      console.log(payload);
 
       if (payload) {
         sessionStorage.setItem("accessJWT", payload);

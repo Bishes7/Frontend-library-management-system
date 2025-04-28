@@ -97,6 +97,7 @@ const LogInPage = () => {
                     <Spinner
                       as="span"
                       animation="border"
+                      style={{ fontWeight: "bold" }}
                       size="sm"
                       role="status"
                       aria-hidden="true"
