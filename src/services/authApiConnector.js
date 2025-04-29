@@ -62,3 +62,13 @@ export const logOutAPI = async () => {
   };
   return apiConnector(obj);
 };
+
+// Password- Reset
+export const passwordReset = async (payload) => {
+  const obj = {
+    url: authApi + "/psw-reset",
+    method: "post",
+    payload,
+  };
+  return apiConnector(obj);
+};

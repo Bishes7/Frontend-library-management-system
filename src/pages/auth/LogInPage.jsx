@@ -79,7 +79,7 @@ const LogInPage = () => {
               type="email"
               placeholder="something@gmail.com"
               required
-              ref={emailRef}
+              forwardref={emailRef}
             />
             <CustomInput
               label="Password"
@@ -87,7 +87,7 @@ const LogInPage = () => {
               name="password"
               placeholder="*******"
               required
-              ref={passwordRef}
+              forwardref={passwordRef}
             />
 
             <div className="d-grid">
