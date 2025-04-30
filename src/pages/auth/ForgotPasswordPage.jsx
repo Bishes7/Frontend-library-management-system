@@ -2,13 +2,17 @@ import React, { forwardRef, useRef, useState } from "react";
 import { Alert, Button, Card, Form, Spinner } from "react-bootstrap";
 import CustomInput from "../../components/custominput/CustomInput";
 import useForm from "../../hooks/useForm";
-import { passwordReset } from "../../services/authApiConnector";
+import { passwordReset, UpdatePassword } from "../../services/authApiConnector";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPasswordPage = () => {
+  const navigate = useNavigate();
   const initialState = {};
+  const [email, setEmail] = useState("");
 
   const { form, passwordErrors, handleOnChange } = useForm(initialState);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDiasbled] = useState(false);
 
   // make state to show or hide the form
   const [showPswResetForm, setShowPswResetForm] = useState(false);
@@ -18,17 +22,32 @@ const ForgotPasswordPage = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
+    setEmail(email);
     // call password reset API
     setIsLoading(true);
+    setIsDiasbled(true);
     const { status } = await passwordReset({ email });
 
     status === "success" && setShowPswResetForm(true);
 
     setIsLoading(false);
+    setIsDiasbled(false);
   };
 
-  const handleOnPswReset = (e) => {
+  const handleOnPswReset = async (e) => {
     e.preventDefault();
+
+    const payload = {
+      email,
+      randomOTP: +form.otp,
+      password: form.password,
+    };
+
+    setIsLoading(true);
+
+    const { status } = await UpdatePassword(payload);
+    status === "success" && setTimeout(() => navigate("/login"), 3000);
+    setIsLoading(false);
   };
 
   return (
@@ -52,7 +71,7 @@ const ForgotPasswordPage = () => {
                   />
 
                   <CustomInput
-                    label="Password"
+                    label="New Password"
                     name="password"
                     type="password"
                     placeholder="******"
@@ -80,7 +99,21 @@ const ForgotPasswordPage = () => {
                       variant="success"
                       disabled={passwordErrors.length}
                     >
-                      Reset Password
+                      {isLoading ? (
+                        <>
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            style={{ fontWeight: "bold" }}
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />{" "}
+                          Loading...
+                        </>
+                      ) : (
+                        "Reset Password"
+                      )}
                     </Button>
                   </div>
                 </Form>
@@ -103,7 +136,7 @@ const ForgotPasswordPage = () => {
                 />
 
                 <div className="d-grid">
-                  <Button type="submit" variant="success">
+                  <Button type="submit" variant="success" disabled={isDisabled}>
                     {isLoading ? (
                       <>
                         <Spinner

@@ -72,3 +72,14 @@ export const passwordReset = async (payload) => {
   };
   return apiConnector(obj);
 };
+
+// Update password reset
+export const UpdatePassword = async (payload) => {
+  const obj = {
+    url: authApi + "/update-password",
+    method: "post",
+    payload,
+    showToast: true,
+  };
+  return apiConnector(obj);
+};
