@@ -1,5 +1,13 @@
 .main {
   min-height: 81vh;
+  width: calc(100% - 200px);
+}
+/* shadow for needed hr */
+.hr-book {
+  height: 2px;
+  background-color: #4f46e5; /* Indigo */
+  border: none;
+  box-shadow: 0 1px 5px rgba(79, 70, 229, 0.4); /* Indigo shadow */
 }
 
 .navbar-logo {

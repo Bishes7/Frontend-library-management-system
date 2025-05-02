@@ -5,7 +5,7 @@ import { logInUser } from "../../services/authApiConnector";
 import { toast } from "react-toastify";
 import { autoLogin, fetchUserAction } from "../../features/user/userAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const LogInPage = () => {
   const dispatch = useDispatch();
@@ -18,8 +18,12 @@ const LogInPage = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  const location = useLocation();
+  console.log(location);
+
+  const path = location?.state?.from ?? "/user";
   useEffect(() => {
-    user?._id ? navigate("/user") : dispatch(autoLogin());
+    user?._id ? navigate(path) : dispatch(autoLogin());
 
     if (
       sessionStorage.getItem("accessJWT") ||

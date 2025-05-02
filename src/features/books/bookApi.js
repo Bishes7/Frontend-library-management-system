@@ -1,17 +1,19 @@
+// call apiConnector to fetch the data
+
 import { apiConnector } from "../../services/apiConnector";
 
-// call apiConnector to fetch the data
 const apiBaseUrl = import.meta.env.VITE_BASE_URl;
-const userApi = apiBaseUrl + "/api/v1/user";
 
-export const fetchUserApi = async () => {
+const bookApi = apiBaseUrl + "/api/v1/books";
+
+export const fetchBookApi = async (payload) => {
   const obj = {
-    url: userApi + "/profile",
-    method: "get",
-    showToast: false,
+    url: bookApi,
+    method: "post",
+    showToast: true,
     isPrivateRoute: true,
+    payload,
   };
   const result = await apiConnector(obj);
-  console.log(result);
   return result;
 };
