@@ -45,34 +45,34 @@ export const apiConnector = async ({
 
     return data;
   } catch (error) {
-    console.log(error);
     const message = error?.response?.data?.message || error.message;
     showToast && toast.error(message);
 
     // if jwt is expired
-    if (error.status === 401 && message === "jwt expired") {
-      // calling api to get new access jwt
-      const { payload } = await getaccessJWT();
+    if (error.status === 401) {
+      if (message === "jwt expired") {
+        // calling api to get new access jwt
+        const { payload } = await getaccessJWT();
 
-      if (payload) {
-        sessionStorage.setItem("accessJWT", payload);
-        return apiConnector({
-          url,
-          method,
-          payload,
-          showToast,
-          isPrivateRoute,
-          isRefreshJWT,
-        });
+        if (payload) {
+          sessionStorage.setItem("accessJWT", payload);
+          return apiConnector({
+            url,
+            method,
+            payload,
+            showToast,
+            isPrivateRoute,
+            isRefreshJWT,
+          });
+        }
+      } else {
+        sessionStorage.removeItem("accessJWT");
+        localStorage.removeItem("refreshJWT");
+        return {
+          status: "error",
+          message: message,
+        };
       }
-    } else {
-      // remove both the tokens
-      sessionStorage.removeItem("accessJWT");
-      localStorage.removeItem("refreshJWT");
     }
-    return {
-      status: "error",
-      message: message,
-    };
   }
 };

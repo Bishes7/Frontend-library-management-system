@@ -6,6 +6,7 @@ const apiBaseUrl = import.meta.env.VITE_BASE_URl;
 
 const bookApi = apiBaseUrl + "/api/v1/books";
 
+// post books in db
 export const fetchBookApi = async (payload) => {
   const obj = {
     url: bookApi,
@@ -13,6 +14,18 @@ export const fetchBookApi = async (payload) => {
     showToast: true,
     isPrivateRoute: true,
     payload,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};
+
+// Get Admin Books
+
+export const getAdminBooks = async () => {
+  const obj = {
+    url: bookApi + "/admin",
+    method: "get",
+    isPrivateRoute: true,
   };
   const result = await apiConnector(obj);
   return result;

@@ -14,7 +14,6 @@ const NewBookForm = () => {
   const handlOnSubmit = async (e) => {
     e.preventDefault();
     const data = await postNewBook(form);
-    console.log(data);
   };
 
   return (

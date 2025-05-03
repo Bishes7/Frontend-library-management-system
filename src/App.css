@@ -1,5 +1,8 @@
 .main {
   min-height: 81vh;
+}
+.user-main {
+  min-height: 81vh;
   width: calc(100% - 200px);
 }
 /* shadow for needed hr */

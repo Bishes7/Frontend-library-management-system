@@ -25,7 +25,7 @@ export const UserLayout = () => {
         </div>
 
         {/* Main Page */}
-        <main className="main ">
+        <main className="user-main ">
           <Outlet />
         </main>
       </div>
