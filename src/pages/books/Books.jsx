@@ -2,25 +2,28 @@ import React, { useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import BookTable from "../../components/table/BookTable";
 import { getAllAdminBooks } from "../../features/books/bookAction";
+import { useDispatch } from "react-redux";
+import { MdAssignmentAdd } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Books = () => {
+  const dispatch = useDispatch();
+
   // useEffect to fetch the books in page render
   useEffect(() => {
-    getAllAdminBooks();
-  }, []);
+    dispatch(getAllAdminBooks());
+  }, [dispatch]);
   return (
     <div>
       <div className="p-4 fw-bold bg">
         Books
         <hr className="hr-book" />
         <div className="text-end p-4">
-          <Button>Add New Book</Button>
-        </div>
-        <div className="d-flex justify-content-between">
-          <div>10 Books found</div>
-          <div className="mb-4">
-            <Form.Control placeholder="Search Books" />
-          </div>
+          <Link to="/user/new-book">
+            <Button>
+              <MdAssignmentAdd /> Add New Book
+            </Button>
+          </Link>
         </div>
         <BookTable />
       </div>
