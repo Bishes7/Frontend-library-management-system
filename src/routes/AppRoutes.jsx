@@ -38,7 +38,7 @@ const AppRoutes = () => {
         <Route index element={<Dashboard />} />
         <Route path="books" element={<Books />} />
         <Route path="new-book" element={<NewBookPage />} />
-        <Route path="edit-book" element={<EditBookPage />} />
+        <Route path="edit-book/:_id" element={<EditBookPage />} />
         <Route path="book-landing" element={<BookLandingPage />} />
         <Route path="reviews" element={<ReviewPage />} />
         <Route path="all" element={<UserPage />} />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const BookTable = () => {
   // useSelector to read the data from the state
@@ -54,7 +55,9 @@ const BookTable = () => {
               <td>{title}</td>
               <td>Yes/No</td>
               <td>
-                <Button variant="warning">Edit</Button>
+                <Link to={"/user/edit-book/" + _id}>
+                  <Button variant="warning">Edit</Button>
+                </Link>
               </td>
             </tr>
           ))}
