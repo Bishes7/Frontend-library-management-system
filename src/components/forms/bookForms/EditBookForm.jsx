@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditBookForm = () => {
+  const initialState = {};
+  const { form, setForm, handleOnChange } = useForm(initialState);
   const navigate = useNavigate();
   const { _id } = useParams();
   // get books from redux store
@@ -19,10 +21,6 @@ const EditBookForm = () => {
       selectedBook?._id ? setForm(selectedBook) : navigate("user/books");
     }
   }, [setForm]);
-
-  const initialState = {};
-
-  const { form, setForm, handleOnChange } = useForm(initialState);
 
   // Function to submit form
   const handlOnSubmit = async (e) => {
