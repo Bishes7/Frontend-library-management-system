@@ -105,6 +105,13 @@ export const editBookTemplate = [
     required: true,
     placeholder: "Programming",
   },
+
+  {
+    label: "Expected Available Date",
+    name: "expectedAvailable",
+    type: "date",
+    placeholder: "yyyy-mm-dd",
+  },
   {
     label: "Description",
     name: "description",

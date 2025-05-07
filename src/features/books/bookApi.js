@@ -30,3 +30,28 @@ export const getAdminBooks = async () => {
   const result = await apiConnector(obj);
   return result;
 };
+
+// Update Books
+export const updateBookApi = async (payload) => {
+  const obj = {
+    url: bookApi,
+    method: "put",
+    isPrivateRoute: true,
+    showToast: true,
+    payload,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};
+
+// Delete Books
+export const deleteBookAPi = async (_id) => {
+  const obj = {
+    url: bookApi + "/" + _id,
+    method: "delete",
+    isPrivateRoute: true,
+    showToast: true,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};
