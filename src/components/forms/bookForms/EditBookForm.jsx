@@ -35,6 +35,7 @@ const EditBookForm = () => {
       __v,
       isbn,
       lastUpdateBy,
+      available,
       ...rest
     } = form;
 

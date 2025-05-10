@@ -43,24 +43,56 @@ const BookTable = () => {
           </tr>
         </thead>
         <tbody>
-          {books.map(({ _id, imgUrl, genre, title, year, status }, i) => (
-            <tr key={_id}>
-              <td>{i + 1}</td>
-              <td
-                className={status === "active" ? "text-success" : "text-danger"}
-              >
-                {status}
-              </td>
-              <td>{imgUrl}</td>
-              <td>{title}</td>
-              <td>Yes/No</td>
-              <td>
-                <Link to={"/user/edit-book/" + _id}>
-                  <Button variant="warning">Edit</Button>
-                </Link>
-              </td>
-            </tr>
-          ))}
+          {books.map(
+            (
+              {
+                _id,
+                imgUrl,
+                genre,
+                title,
+                year,
+                status,
+                available,
+                expectedAvailable,
+              },
+              i
+            ) => (
+              <tr key={_id}>
+                <td>{i + 1}</td>
+                <td
+                  className={
+                    status === "active" ? "text-success" : "text-danger"
+                  }
+                >
+                  {status}
+                </td>
+                <td>
+                  {" "}
+                  <img
+                    src={
+                      typeof imgUrl === "string"
+                        ? import.meta.env.VITE_BASE_URl + imgUrl.slice(6)
+                        : "https://via.placeholder.com/50"
+                    }
+                    width="50"
+                  />
+                </td>
+                <td>{title}</td>
+                <td>
+                  {available
+                    ? "Yes"
+                    : !available && expectedAvailable
+                    ? expectedAvailable.slice(0, 10)
+                    : "N/A"}
+                </td>
+                <td>
+                  <Link to={"/user/edit-book/" + _id}>
+                    <Button variant="warning">Edit</Button>
+                  </Link>
+                </td>
+              </tr>
+            )
+          )}
         </tbody>
       </Table>
     </div>
