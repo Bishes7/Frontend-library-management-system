@@ -43,6 +43,7 @@ const NewBookForm = () => {
             name="image"
             onChange={handleOnImgSelect}
             required
+            accept="image/*"
           />
         </Form.Group>
 

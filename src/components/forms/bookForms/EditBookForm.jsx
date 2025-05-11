@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import CustomInput from "../../custominput/CustomInput";
 import { editBookTemplate } from "../../../assets/custominputs/bookTemplate";
@@ -7,10 +7,13 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import useForm from "../../../hooks/useForm";
 import { updateBookApi } from "../../../features/books/bookApi";
+import { toast } from "react-toastify";
 
 const EditBookForm = () => {
   const initialState = {};
   const { form, setForm, handleOnChange } = useForm(initialState);
+
+  const [image, setImage] = useState([]);
   const navigate = useNavigate();
   const { _id } = useParams();
   // get books from redux store
@@ -22,6 +25,16 @@ const EditBookForm = () => {
       selectedBook?._id ? setForm(selectedBook) : navigate("/user/books");
     }
   }, [_id, book, form._id, setForm]);
+
+  // Edit Book Img
+  const handleOnImgSelect = (e) => {
+    const files = [...e.target.files];
+    if (files.length > 2) {
+      e.target.value = "";
+      toast.error("Max 2 images are allowed");
+    }
+    setImage([...e.target.files]);
+  };
 
   // Function to submit form
   const handlOnSubmit = async (e) => {
@@ -39,7 +52,16 @@ const EditBookForm = () => {
       ...rest
     } = form;
 
-    const result = await updateBookApi(rest);
+    const formData = new FormData();
+
+    for (const key in rest) {
+      formData.append(key, rest[key]);
+    }
+
+    image.map((img) => formData.append("image", img));
+
+    const result = await updateBookApi(formData);
+    return result;
   };
 
   return (
@@ -65,6 +87,40 @@ const EditBookForm = () => {
           />
         ))}
 
+        <div className="m-3 d-flex">
+          {form?.imageList?.map((img) => (
+            <div key={img} className="m-1">
+              <Form.Check
+                type="radio"
+                name="imgUrl"
+                value={img}
+                checked={form.imgUrl === img}
+                onChange={handleOnChange}
+              />
+              <Form.Label>Make Thumbnail</Form.Label>
+              <Form.Check type="checkbox" />
+              <Form.Label>Delete</Form.Label>
+
+              <img
+                src={import.meta.env.VITE_BASE_URl + img.slice(6)}
+                width="250px"
+                className="img-thumbnail"
+                alt=""
+              />
+            </div>
+          ))}
+        </div>
+        <Form.Group className="mb-3 fw-bold text-info ">
+          <Form.Label>Upload more images (Max - 2)</Form.Label>
+          <Form.Control
+            type="file"
+            name="image"
+            multiple
+            accept="image/*"
+            onChange={handleOnImgSelect}
+          ></Form.Control>
+        </Form.Group>
+
         <div className="mb-3 text-secondary">
           <h4>Addtional Info</h4>
           <hr />
@@ -79,7 +135,7 @@ const EditBookForm = () => {
         </div>
 
         <div className="d-grid">
-          <Button type="submit" variant="info">
+          <Button type="submit" variant="warning">
             Edit Book
           </Button>
         </div>

@@ -83,13 +83,13 @@ export const editBookTemplate = [
     required: true,
     placeholder: "Andrew Hunt",
   },
-  {
-    label: "Image Url",
-    name: "imgUrl",
-    type: "url",
-    required: true,
-    placeholder: "https://example.com/pragmatic.jpg",
-  },
+  // {
+  //   label: "Image Url",
+  //   name: "imgUrl",
+  //   type: "url",
+  //   required: true,
+  //   placeholder: "https://example.com/pragmatic.jpg",
+  // },
   {
     label: "ISBN",
     name: "isbn",
