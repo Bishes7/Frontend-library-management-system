@@ -4,6 +4,7 @@ import CustomInput from "../../custominput/CustomInput";
 import { bookTemplate } from "../../../assets/custominputs/bookTemplate";
 import useForm from "../../../hooks/useForm";
 import { postNewBook } from "../../../features/books/bookAction";
+import { data } from "react-router-dom";
 
 const NewBookForm = () => {
   const [image, setImage] = useState();

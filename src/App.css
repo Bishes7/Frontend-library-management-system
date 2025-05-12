@@ -15,7 +15,7 @@
 
 .navbar-logo {
   height: 40px;
-  transform: scale(1.9); /* Scales visually without affecting layout */
+  transform: scale(1.7); /* Scales visually without affecting layout */
 }
 
 /* Login Page */
@@ -24,4 +24,19 @@
 
   background: url(./assets/pic2.jpg) center no-repeat;
   background-size: cover;
+}
+
+/* Carousel */
+.carousel {
+  height: 65vh;
+}
+.carousel img {
+  height: 65vh;
+  object-fit: cover;
+  width: 100%;
+}
+
+.carousel-caption {
+  background: rgba(128, 128, 128, 0.645);
+  backdrop-filter: blur(2px);
 }

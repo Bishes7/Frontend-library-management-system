@@ -12,6 +12,8 @@ import { IoLogOut } from "react-icons/io5";
 import { logOutAPI } from "../../services/authApiConnector";
 import { setUser } from "../../features/user/userSLice";
 import { toast } from "react-toastify";
+import { Form, InputGroup } from "react-bootstrap";
+import { FaSearch } from "react-icons/fa";
 
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
@@ -42,35 +44,51 @@ export const Header = () => {
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Link className="nav-link" to="/">
-              <IoHome /> Home
-            </Link>
+          <div className="w-100 d-flex justify-content-between flex-column flex-md-row m-1">
+            <div></div>
+            <Form style={{ width: "40%" }}>
+              <InputGroup className="mt-1">
+                <Form.Control
+                  placeholder="Search Books"
+                  aria-label="Search Books"
+                  aria-describedby="basic-addon2"
+                />
+                <InputGroup.Text id="basic-addon2">
+                  <FaSearch />
+                </InputGroup.Text>
+              </InputGroup>
+            </Form>
 
-            {user?._id ? (
-              <>
-                {" "}
-                <Link className="nav-link" to="/user">
-                  <MdDashboard /> Dashboard
-                </Link>
-                <Link className="nav-link" onClick={handleOnLogOut}>
-                  <IoLogOut />
-                  Logout
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link className="nav-link" to="/signup">
-                  <SiGnuprivacyguard />
-                  SignUP
-                </Link>
-                <Link className="nav-link" to="/login">
-                  <BiLogIn />
-                  LogIN
-                </Link>
-              </>
-            )}
-          </Nav>
+            <Nav className="">
+              <Link className="nav-link" to="/">
+                <IoHome /> Home
+              </Link>
+
+              {user?._id ? (
+                <>
+                  {" "}
+                  <Link className="nav-link" to="/user">
+                    <MdDashboard /> Dashboard
+                  </Link>
+                  <Link className="nav-link" onClick={handleOnLogOut}>
+                    <IoLogOut />
+                    Logout
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link className="nav-link" to="/signup">
+                    <SiGnuprivacyguard />
+                    SignUP
+                  </Link>
+                  <Link className="nav-link" to="/login">
+                    <BiLogIn />
+                    LogIN
+                  </Link>
+                </>
+              )}
+            </Nav>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>

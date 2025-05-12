@@ -54,6 +54,7 @@ const EditBookForm = () => {
 
     const formData = new FormData();
 
+    // appending form data to formData
     for (const key in rest) {
       formData.append(key, rest[key]);
     }
@@ -88,7 +89,7 @@ const EditBookForm = () => {
         ))}
 
         <div className="m-3 d-flex">
-          {form?.imageList?.map((img) => (
+          {form.imageList?.map((img) => (
             <div key={img} className="m-1">
               <Form.Check
                 type="radio"
@@ -96,14 +97,12 @@ const EditBookForm = () => {
                 value={img}
                 checked={form.imgUrl === img}
                 onChange={handleOnChange}
+                label="Make Thumbnail"
               />
-              <Form.Label>Make Thumbnail</Form.Label>
-              <Form.Check type="checkbox" />
-              <Form.Label>Delete</Form.Label>
 
               <img
                 src={import.meta.env.VITE_BASE_URl + img.slice(6)}
-                width="250px"
+                width="100px"
                 className="img-thumbnail"
                 alt=""
               />
