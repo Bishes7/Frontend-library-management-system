@@ -55,3 +55,15 @@ export const deleteBookAPi = async (_id) => {
   const result = await apiConnector(obj);
   return result;
 };
+
+// Get Books for All Users
+
+export const getBooksForAll = async () => {
+  const obj = {
+    url: bookApi,
+    method: "get",
+  };
+  const result = await apiConnector(obj);
+  console.log(result);
+  return result;
+};

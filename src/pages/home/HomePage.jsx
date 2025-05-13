@@ -7,7 +7,7 @@ import Recommendation from "../../components/pageSection/Recommendation";
 
 const Home = () => {
   return (
-    <Container>
+    <Container className="mb-4">
       <Row>
         <Col>
           {/* Hero Section */}

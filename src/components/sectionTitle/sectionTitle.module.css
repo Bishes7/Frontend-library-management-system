@@ -8,9 +8,9 @@
 }
 
 .line {
-  background-color: black;
+  background-color: gray;
   flex-grow: 1;
   height: 3px;
   box-shadow: 0 3px 8px;
-  margin: 5rem 0;
+  margin-top: 5rem 2rem;
 }

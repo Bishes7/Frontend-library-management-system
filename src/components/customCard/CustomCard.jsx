@@ -1,0 +1,20 @@
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
+
+export const CustomCard = ({ imgUrl, title, year, slug, author }) => {
+  return (
+    <Card className="shadow" style={{ width: "16rem" }}>
+      <Card.Img variant="top" src={imgUrl} />
+      <Card.Body className="text-center">
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>
+          {author}-{year}
+        </Card.Text>
+        <Link to={slug}>
+          <Button variant="dark">View Book Details</Button>
+        </Link>
+      </Card.Body>
+    </Card>
+  );
+};
