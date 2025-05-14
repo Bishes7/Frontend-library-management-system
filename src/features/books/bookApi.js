@@ -64,6 +64,5 @@ export const getBooksForAll = async () => {
     method: "get",
   };
   const result = await apiConnector(obj);
-  console.log(result);
   return result;
 };

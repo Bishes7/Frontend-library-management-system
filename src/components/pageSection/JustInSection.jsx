@@ -13,7 +13,6 @@ const JustInSection = () => {
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
     books = sortedBook.slice(0, 4);
-    console.log(books);
   }
 
   return (

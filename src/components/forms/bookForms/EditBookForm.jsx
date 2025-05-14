@@ -49,6 +49,7 @@ const EditBookForm = () => {
       isbn,
       lastUpdateBy,
       available,
+      averageRating,
       ...rest
     } = form;
 

@@ -69,12 +69,9 @@ const BookTable = () => {
                 <td>
                   {" "}
                   <img
-                    src={
-                      typeof imgUrl === "string"
-                        ? import.meta.env.VITE_BASE_URl + imgUrl.slice(6)
-                        : "https://via.placeholder.com/50"
-                    }
+                    src={import.meta.env.VITE_BASE_URl + imgUrl.slice(6)}
                     width="50"
+                    alt="image"
                   />
                 </td>
                 <td>{title}</td>

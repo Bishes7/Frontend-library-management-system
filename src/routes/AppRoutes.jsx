@@ -26,6 +26,7 @@ const AppRoutes = () => {
       {/* PUBLIC PAGES */}
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="book/:slug" element={<BookLandingPage />} />
         <Route path="signup" element={<SignUpPage />} />
         <Route path="activate-user" element={<VerifyUser />} />
         <Route path="login" element={<LogInPage />} />
@@ -39,7 +40,7 @@ const AppRoutes = () => {
         <Route path="books" element={<Books />} />
         <Route path="new-book" element={<NewBookPage />} />
         <Route path="edit-book/:_id" element={<EditBookPage />} />
-        <Route path="book-landing" element={<BookLandingPage />} />
+
         <Route path="reviews" element={<ReviewPage />} />
         <Route path="all" element={<UserPage />} />
         <Route path="borrow" element={<Borrow />} />
