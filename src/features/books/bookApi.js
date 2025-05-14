@@ -66,3 +66,13 @@ export const getBooksForAll = async () => {
   const result = await apiConnector(obj);
   return result;
 };
+
+// Get Only Selected Public Books
+export const getSelectedBook = async (slug) => {
+  const obj = {
+    url: bookApi + "/public/" + slug,
+    method: "get",
+  };
+  const result = await apiConnector(obj);
+  return result;
+};

@@ -1,5 +1,10 @@
-import { fetchBookApi, getAdminBooks, getBooksForAll } from "./bookApi";
-import { setBook, setPublicBook } from "./bookSlice";
+import {
+  fetchBookApi,
+  getAdminBooks,
+  getBooksForAll,
+  getSelectedBook,
+} from "./bookApi";
+import { setBook, setPublicBook, setSelectedBook } from "./bookSlice";
 
 // call bookapi to post books
 export const postNewBook = async (payload) => {
@@ -16,4 +21,10 @@ export const getAllAdminBooks = () => async (dispatch) => {
 export const getAllUserBooks = () => async (dispatch) => {
   const { status, payload } = await getBooksForAll();
   status === "success" && dispatch(setPublicBook(payload));
+};
+
+// API call to get only selected books
+export const getOnlySelectedBook = (slug) => async (dispatch) => {
+  const { status, payload } = await getSelectedBook(slug);
+  status === "success" && dispatch(setSelectedBook(payload));
 };

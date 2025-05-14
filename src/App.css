@@ -40,3 +40,7 @@
   background: rgba(128, 128, 128, 0.645);
   backdrop-filter: blur(2px);
 }
+
+.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+  content: ">";
+}
