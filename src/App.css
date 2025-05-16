@@ -44,3 +44,15 @@
 .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
   content: ">";
 }
+
+.review-item {
+  margin-bottom: 2rem;
+}
+
+.review-item .left div {
+  background: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid gray;
+}

@@ -6,18 +6,23 @@ import {
   Col,
   Container,
   Row,
+  Tab,
+  Tabs,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getOnlySelectedBook } from "../../features/books/bookAction";
-import { FaStar } from "react-icons/fa";
+import Star from "../../components/star/star";
+import Reviews from "./reviews/Reviews";
 
 const BookLandingPage = () => {
   const { slug } = useParams();
 
+  const [showImg, setShowImg] = useState(0);
+
   const dispatch = useDispatch();
 
-  const [clickedBook, setClickedBook] = useState({});
+  // const [clickedBook, setClickedBook] = useState({});
 
   // const { publicBook } = useSelector((state) => state.bookInfo);
   const { selectedBook } = useSelector((state) => state.bookInfo);
@@ -59,34 +64,42 @@ const BookLandingPage = () => {
       {selectedBook?._id && (
         <>
           <Row>
-            <Col>
-              <div>
+            <Col md={4}>
+              <div className="mb-3" style={{ height: "400px" }}>
                 <img
                   src={
                     import.meta.env.VITE_BASE_URl +
-                    selectedBook?.imgUrl?.slice(6)
+                    selectedBook?.imageList[showImg].slice(6)
                   }
-                  alt=""
-                  width="250px"
+                  alt={selectedBook.title}
+                  // width="100%"
+                  className="h-100 w-100 object-fit-contain"
                 />
+              </div>
+              {/* Scrollable THumbnails */}
+              <div className="d-flex overflow-auto gap-2 py-2">
+                {selectedBook.imageList?.map((url, i) => (
+                  <img
+                    src={import.meta.env.VITE_BASE_URl + url?.slice(6)}
+                    key={url}
+                    width={"70px"}
+                    className="img-thumbnail"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setShowImg(i)}
+                  />
+                ))}
               </div>
             </Col>
             <Col>
-              <div className="d-flex h-100 flex-column justify-content-between ">
+              <div className="d-flex h-100 flex-column justify-content-between  ">
                 <div className="top">
                   <h1>{selectedBook.title}</h1>
                   <div className="fw-bold">
                     {selectedBook.author} - {selectedBook.year}
                   </div>
                   <div className="my-2">
-                    <span>{selectedBook.genre}</span> |{" "}
-                    <span>
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                    </span>
+                    <span>{selectedBook.genre}</span>
+                    <Star avgRating={2} />
                   </div>
                   <div>{selectedBook.description.slice(0, 300)}...</div>
                 </div>
@@ -99,8 +112,24 @@ const BookLandingPage = () => {
               </div>
             </Col>
           </Row>
-          <Row>
-            <Col>details</Col>
+          <Row className="mt-5 mb-5">
+            <Col className="border p-3 rounded shadow-lg">
+              <h3 className="margin-auto mt-5 text-center">
+                More Details here
+              </h3>
+              <Tabs
+                defaultActiveKey="description"
+                id="uncontrolled-tab-example"
+                className="mb-3"
+              >
+                <Tab eventKey="description" title="Description">
+                  <div>{selectedBook.description}</div>
+                </Tab>
+                <Tab eventKey="reviews" title="reviews">
+                  <Reviews />
+                </Tab>
+              </Tabs>
+            </Col>
           </Row>
         </>
       )}
