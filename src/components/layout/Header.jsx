@@ -14,7 +14,7 @@ import { setUser } from "../../features/user/userSLice";
 import { toast } from "react-toastify";
 import { Form, InputGroup } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
-
+import { IoBookSharp } from "react-icons/io5";
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
@@ -62,6 +62,10 @@ export const Header = () => {
             <Nav className="">
               <Link className="nav-link" to="/">
                 <IoHome /> Home
+              </Link>
+
+              <Link className="nav-link" to="/all-books">
+                <IoBookSharp /> Books
               </Link>
 
               {user?._id ? (
