@@ -1,14 +1,22 @@
 import React from "react";
 import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
 import { useSelector } from "react-redux";
-
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import BookListing from "../../components/bookListing/BookListing";
 
-const AllBooks = () => {
-  // Read books from redux
+const Search = () => {
   const { publicBook } = useSelector((state) => state.bookInfo);
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query");
+
+  const navigate = useNavigate();
+
+  !query && navigate("/");
+
+  const searchBookArr = publicBook.filter((book) => {
+    const searchSet = book.title + " " + book.description.toLowerCase();
+    return searchSet.includes(query.toLocaleLowerCase());
+  });
 
   return (
     <Container>
@@ -19,14 +27,14 @@ const AllBooks = () => {
               Home
             </Breadcrumb.Item>
             <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/all-books" }}>
-              All Books
+              Search
             </Breadcrumb.Item>
           </Breadcrumb>
         </Col>
       </Row>
-      <BookListing booklist={publicBook} />
+      <BookListing booklist={searchBookArr} />
     </Container>
   );
 };
 
-export default AllBooks;
+export default Search;

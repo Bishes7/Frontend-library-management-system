@@ -20,6 +20,7 @@ import {
 import { DefaultLayout } from "../components/layout/DefaultLayout ";
 import { UserLayout } from "../components/layout/UserLayout";
 import AllBooks from "../pages/books/AllBooks";
+import Search from "../pages/books/Search";
 
 const AppRoutes = () => {
   return (
@@ -28,6 +29,7 @@ const AppRoutes = () => {
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<HomePage />} />
         <Route path="all-books" element={<AllBooks />} />
+        <Route path="search" element={<Search />} />
         <Route path="book/:slug" element={<BookLandingPage />} />
         <Route path="signup" element={<SignUpPage />} />
         <Route path="activate-user" element={<VerifyUser />} />

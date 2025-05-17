@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { BiLogIn } from "react-icons/bi";
@@ -15,9 +15,15 @@ import { toast } from "react-toastify";
 import { Form, InputGroup } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import { IoBookSharp } from "react-icons/io5";
+import { useRef } from "react";
+
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const bookSearchRef = useRef("");
 
   const handleOnLogOut = async () => {
     const pending = new Promise((resolve) => setTimeout(resolve, 1000)); // 1 second wait
@@ -35,6 +41,12 @@ export const Header = () => {
     dispatch(setUser({}));
   };
 
+  const handleOnSearch = (e) => {
+    e.preventDefault();
+    const str = bookSearchRef.current.value;
+    str && navigate("/search?query=" + str);
+  };
+
   return (
     <Navbar expand="md" className="bg-dark fw-bold" variant="dark">
       <Container>
@@ -46,14 +58,16 @@ export const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <div className="w-100 d-flex justify-content-between flex-column flex-md-row m-1">
             <div></div>
-            <Form style={{ width: "40%" }}>
+            <Form style={{ width: "40%" }} onSubmit={handleOnSearch}>
               <InputGroup className="mt-1">
                 <Form.Control
                   placeholder="Search Books"
                   aria-label="Search Books"
                   aria-describedby="basic-addon2"
+                  name="s"
+                  ref={bookSearchRef}
                 />
-                <InputGroup.Text id="basic-addon2">
+                <InputGroup.Text id="basic-addon2" as="button">
                   <FaSearch />
                 </InputGroup.Text>
               </InputGroup>
