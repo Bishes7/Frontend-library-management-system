@@ -14,6 +14,7 @@ import { Link, useParams } from "react-router-dom";
 import { getOnlySelectedBook } from "../../features/books/bookAction";
 import Star from "../../components/star/star";
 import Reviews from "./reviews/Reviews";
+import { setCartItem } from "../../features/books/bookSlice";
 
 const BookLandingPage = () => {
   const { slug } = useParams();
@@ -25,7 +26,7 @@ const BookLandingPage = () => {
   // const [clickedBook, setClickedBook] = useState({});
 
   // const { publicBook } = useSelector((state) => state.bookInfo);
-  const { selectedBook } = useSelector((state) => state.bookInfo);
+  const { selectedBook, cartItem } = useSelector((state) => state.bookInfo);
 
   useEffect(() => {
     // First Approach Locally
@@ -35,6 +36,12 @@ const BookLandingPage = () => {
     // Second Approach- Fetch from server
     dispatch(getOnlySelectedBook(slug));
   }, [dispatch, slug]);
+
+  const handleOnAddCart = () => {
+    dispatch(setCartItem(selectedBook));
+  };
+
+  const IsBookInCart = cartItem.find((book) => book._id === selectedBook._id);
 
   return (
     <Container>
@@ -106,7 +113,15 @@ const BookLandingPage = () => {
                 <div className="buttom">
                   <hr />
                   <div className="d-grid">
-                    <Button variant="dark">Add to Borrow List</Button>
+                    <Button
+                      variant="dark"
+                      onClick={handleOnAddCart}
+                      disabled={IsBookInCart}
+                    >
+                      {IsBookInCart
+                        ? "Book already exists in the Cart"
+                        : "Add Book to Cart"}
+                    </Button>
                   </div>
                 </div>
               </div>

@@ -16,9 +16,13 @@ import { Form, InputGroup } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import { IoBookSharp } from "react-icons/io5";
 import { useRef } from "react";
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
+
+  const { cartItem } = useSelector((state) => state.bookInfo);
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -105,6 +109,12 @@ export const Header = () => {
                   </Link>
                 </>
               )}
+              <Link to="/cart" className="position-relative nav-link">
+                <div className="cart-count position-absolute fw-bold ">
+                  {cartItem.length}
+                </div>
+                <MdOutlineShoppingCart className="fs-4" />
+              </Link>
             </Nav>
           </div>
         </Navbar.Collapse>

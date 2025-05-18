@@ -56,3 +56,18 @@
   border-radius: 50%;
   border: 2px solid gray;
 }
+
+/* cart- icon */
+.cart-count {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 0, 0, 0.763);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -3px;
+  right: -5px;
+  transition: all 0.5s;
+  color: white;
+}
