@@ -35,7 +35,7 @@ const CartPage = () => {
 
       dispatch(resetCartItem());
 
-      navigate("/thankyou");
+      navigate("/user/thankyou");
     }
   };
 
