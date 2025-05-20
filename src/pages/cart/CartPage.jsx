@@ -2,15 +2,41 @@ import React from "react";
 import { Alert, Button, Col, Container, Row, Table } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../../features/books/bookSlice";
+
+import { Link, useNavigate } from "react-router-dom";
+import { removeFromCart, resetCartItem } from "../../features/cart/cartSlice";
+import { borrowBookAPi } from "../../features/cart/cartApi";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
   // Read books from redux
-  const { cartItem } = useSelector((state) => state.bookInfo);
+  const { cartItem } = useSelector((state) => state.cartInfo);
+  const { user } = useSelector((state) => state.userInfo);
 
   const handleOnBookDelete = (_id) => {
     dispatch(removeFromCart(_id));
+  };
+
+  const handleOnBorrow = async () => {
+    if (window.confirm("Are you sure, you wanna proceed to checkout ? ")) {
+      // To do
+      const bookArr = cartItem.map(({ _id, title, imgUrl }) => {
+        return { bookId: _id, bookTitle: title, thumbnail: imgUrl };
+      });
+      const pending = borrowBookAPi(bookArr);
+      toast.promise(pending, { pending: "Please wait" });
+
+      const { status, message, payload } = await pending;
+
+      toast[status](message);
+
+      dispatch(resetCartItem());
+
+      navigate("/thankyou");
+    }
   };
 
   return (
@@ -49,7 +75,15 @@ const CartPage = () => {
 
             {cartItem.length > 0 ? (
               <div className="text-end">
-                <Button variant="dark">Login To Borrow || Proceed</Button>
+                {user._id ? (
+                  <Button variant="dark" onClick={handleOnBorrow}>
+                    Borrow
+                  </Button>
+                ) : (
+                  <Link to="/login" state={{ from: "/cart" }}>
+                    <Button variant="dark">Login To Borrow </Button>
+                  </Link>
+                )}
               </div>
             ) : (
               <div>

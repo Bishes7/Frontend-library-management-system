@@ -21,7 +21,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
 
-  const { cartItem } = useSelector((state) => state.bookInfo);
+  const { cartItem } = useSelector((state) => state.cartInfo);
 
   const dispatch = useDispatch();
 

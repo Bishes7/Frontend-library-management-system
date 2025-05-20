@@ -14,7 +14,8 @@ import { Link, useParams } from "react-router-dom";
 import { getOnlySelectedBook } from "../../features/books/bookAction";
 import Star from "../../components/star/star";
 import Reviews from "./reviews/Reviews";
-import { setCartItem } from "../../features/books/bookSlice";
+import { setCartItem } from "../../features/cart/cartSlice";
+import { toast } from "react-toastify";
 
 const BookLandingPage = () => {
   const { slug } = useParams();
@@ -26,7 +27,8 @@ const BookLandingPage = () => {
   // const [clickedBook, setClickedBook] = useState({});
 
   // const { publicBook } = useSelector((state) => state.bookInfo);
-  const { selectedBook, cartItem } = useSelector((state) => state.bookInfo);
+  const { selectedBook } = useSelector((state) => state.bookInfo);
+  const { cartItem } = useSelector((state) => state.cartInfo);
 
   useEffect(() => {
     // First Approach Locally
@@ -39,6 +41,7 @@ const BookLandingPage = () => {
 
   const handleOnAddCart = () => {
     dispatch(setCartItem(selectedBook));
+    toast.info("Book Successfully added in the cart");
   };
 
   const IsBookInCart = cartItem.find((book) => book._id === selectedBook._id);
