@@ -22,6 +22,7 @@ import { UserLayout } from "../components/layout/UserLayout";
 import AllBooks from "../pages/books/AllBooks";
 import Search from "../pages/books/Search";
 import CartPage from "../pages/cart/CartPage";
+import ThankyouPage from "../pages/thankyouPage/ThankyouPage";
 
 const AppRoutes = () => {
   return (
@@ -50,7 +51,9 @@ const AppRoutes = () => {
         <Route path="reviews" element={<ReviewPage />} />
         <Route path="all" element={<UserPage />} />
         <Route path="borrow" element={<Borrow />} />
+        <Route path="my-borrow" element={<Borrow />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="thankyou" element={<ThankyouPage />} />
       </Route>
     </Routes>
   );

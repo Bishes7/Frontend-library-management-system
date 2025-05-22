@@ -31,7 +31,12 @@ export const SideBar = () => {
       </div>
       <div className="p-2">
         <Link className="nav-link" to="/user/borrow">
-          <MdOutlineHistoryEdu /> Borrow History
+          <MdOutlineHistoryEdu /> All Borrows
+        </Link>
+      </div>
+      <div className="p-2">
+        <Link className="nav-link" to="/user/my-borrow">
+          <MdOutlineHistoryEdu /> My Borrow List
         </Link>
       </div>
       <div className="p-2">
