@@ -17,6 +17,7 @@ import { FaSearch } from "react-icons/fa";
 import { IoBookSharp } from "react-icons/io5";
 import { useRef } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { setAllBorrow, setMyBorrows } from "../../features/borrow/BorrowSlice";
 
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
@@ -43,6 +44,8 @@ export const Header = () => {
     sessionStorage.removeItem("accessJWT");
     localStorage.removeItem("refreshJWT");
     dispatch(setUser({}));
+    dispatch(setMyBorrows([]));
+    dispatch(setAllBorrow([]));
   };
 
   const handleOnSearch = (e) => {

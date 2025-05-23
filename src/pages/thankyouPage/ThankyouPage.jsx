@@ -6,7 +6,7 @@ const ThankyouPage = () => {
   return (
     <div className="text-center">
       <Alert variant="success">Thank you for exploring our services</Alert>
-      <Link to="/user/borrow">view your borrowed book</Link>
+      <Link to="/user/my-borrow">view your borrowed book</Link>
     </div>
   );
 };

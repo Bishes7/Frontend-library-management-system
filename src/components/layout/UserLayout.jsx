@@ -4,8 +4,10 @@ import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 import { SideBar } from "./SideBar";
 import AuthRoute from "../auth/AuthRoute";
+import { useSelector } from "react-redux";
 
 export const UserLayout = () => {
+  const { user } = useSelector((state) => state.userInfo);
   return (
     <AuthRoute>
       {/* NavBAR */}
@@ -18,7 +20,7 @@ export const UserLayout = () => {
         >
           <div className="p-3 text-warning">
             <div>Welcome Back</div>
-            <h4>Bishes Adhikari</h4>
+            <h4>{user.fName}</h4>
           </div>
           <hr />
           <SideBar />

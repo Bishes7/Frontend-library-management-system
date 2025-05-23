@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllBorrows } from "../../features/borrow/borrowAction";
 
-const BorrowTable = () => {
+const BorrowTable = ({ admin }) => {
   const dispatch = useDispatch();
 
   // useSelector
-  const { allBorrows } = useSelector((state) => state.borrowInfo);
+  const { allBorrows, myBorrows } = useSelector((state) => state.borrowInfo);
+
+  const borrowSource = admin ? allBorrows : myBorrows;
 
   // useEffect to show books on first render
   useEffect(() => {
-    dispatch(getAllBorrows());
-  }, [dispatch]);
+    dispatch(getAllBorrows(admin));
+  }, [dispatch, admin]);
 
   // function to filter the boooks based on value
 
@@ -24,7 +26,9 @@ const BorrowTable = () => {
   return (
     <div>
       <div className="d-flex justify-content-between">
-        <div className="text-secondary">10 books found</div>
+        <div className="text-secondary fw-bold">
+          {borrowSource.length} books found
+        </div>
         <div className="mb-4">
           <Form.Control placeholder="Search Books" onChange={handleOnSearch} />
         </div>
@@ -42,7 +46,7 @@ const BorrowTable = () => {
           </tr>
         </thead>
         <tbody>
-          {allBorrows.map(
+          {borrowSource.map(
             (
               { bookTitle, _id, isReturned, dueDate, returnedDate, thumbnail },
               i

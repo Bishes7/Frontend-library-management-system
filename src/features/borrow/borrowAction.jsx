@@ -1,7 +1,8 @@
 import { borrowBooksApi } from "./borrowApi";
-import { setAllBorrow } from "./BorrowSlice";
+import { setAllBorrow, setMyBorrows } from "./BorrowSlice";
 
-export const getAllBorrows = () => async (dispatch) => {
-  const { payload, status, message } = await borrowBooksApi();
-  dispatch(setAllBorrow(payload));
+export const getAllBorrows = (admin) => async (dispatch) => {
+  const { payload, status, message } = await borrowBooksApi(admin);
+
+  admin ? dispatch(setAllBorrow(payload)) : dispatch(setMyBorrows(payload));
 };

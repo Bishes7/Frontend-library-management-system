@@ -4,9 +4,11 @@ const apiBaseUrl = import.meta.env.VITE_BASE_URl;
 
 const borrowAPi = apiBaseUrl + "/api/v1/borrows";
 
-export const borrowBooksApi = async () => {
+// for admins only
+export const borrowBooksApi = async (admin) => {
+  const pathUrl = admin ? "/admin" : "/user";
   const obj = {
-    url: borrowAPi + "/admin",
+    url: borrowAPi + pathUrl,
     method: "get",
     isPrivateRoute: true,
   };
