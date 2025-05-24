@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getAllBorrows } from "../../features/borrow/borrowAction";
 
 const BorrowTable = ({ admin }) => {
   const dispatch = useDispatch();
+
+  const location = useLocation();
+  const pathname = location.pathname;
 
   // useSelector
   const { allBorrows, myBorrows } = useSelector((state) => state.borrowInfo);
@@ -39,29 +42,36 @@ const BorrowTable = ({ admin }) => {
             <th>#</th>
             <th>Due Date </th>
             <th>Return Date </th>
-            <th>Status</th>
+            {!pathname.includes("my-borrow") && <th>Status</th>}
             <th>Thumbnail</th>
-
             <th>Title</th>
+            {!admin && <th>Action</th>}
           </tr>
         </thead>
         <tbody>
           {borrowSource.map(
             (
-              { bookTitle, _id, isReturned, dueDate, returnedDate, thumbnail },
+              {
+                bookTitle,
+                _id,
+                isReturned,
+                dueDate,
+                returnedDate,
+                thumbnail,
+                reviewId,
+              },
               i
             ) => (
               <tr key={_id}>
                 <td>{i + 1}</td>
                 <td>{dueDate.slice(0, 10)}</td>
                 <td>{isReturned ? returnedDate : "Not yet"}</td>
-                <td
-                  className={
-                    status === "active" ? "text-success" : "text-danger"
-                  }
-                >
-                  {status}
-                </td>
+                {!pathname.includes("my-borrow") && (
+                  <td>
+                    {isReturned ? "Returned" : "Borrowed"}
+                    {reviewId && " & Left Review"}
+                  </td>
+                )}
                 <td>
                   {" "}
                   <img
@@ -72,11 +82,17 @@ const BorrowTable = ({ admin }) => {
                 </td>
                 <td>{bookTitle}</td>
 
-                <td>
-                  <Link to={"/user/edit-book/" + _id}>
-                    <Button variant="warning">Return Book</Button>
-                  </Link>
-                </td>
+                {!pathname.includes("borrow") && (
+                  <td>
+                    {!isReturned && (
+                      <Button variant="warning">Return Book</Button>
+                    )}
+                    {isReturned && !reviewId && (
+                      <Button variant="info">Leave Review</Button>
+                    )}
+                    {reviewId && "Reviewded"}
+                  </td>
+                )}
               </tr>
             )
           )}
