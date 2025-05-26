@@ -59,6 +59,7 @@ const BorrowTable = ({ admin }) => {
                 returnedDate,
                 thumbnail,
                 reviewId,
+                bookSlug,
               },
               i
             ) => (
@@ -80,7 +81,12 @@ const BorrowTable = ({ admin }) => {
                     alt="image"
                   />
                 </td>
-                <td>{bookTitle}</td>
+                <td>
+                  {" "}
+                  <a href={`/book/${bookSlug}`} target="_blank">
+                    {bookTitle}
+                  </a>
+                </td>
 
                 {!pathname.includes("borrow") && (
                   <td>

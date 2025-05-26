@@ -23,8 +23,13 @@ const CartPage = () => {
   const handleOnBorrow = async () => {
     if (window.confirm("Are you sure, you wanna proceed to checkout ? ")) {
       // To do
-      const bookArr = cartItem.map(({ _id, title, imgUrl }) => {
-        return { bookId: _id, bookTitle: title, thumbnail: imgUrl };
+      const bookArr = cartItem.map(({ _id, title, imgUrl, slug }) => {
+        return {
+          bookId: _id,
+          bookTitle: title,
+          thumbnail: imgUrl,
+          bookSlug: slug,
+        };
       });
       const pending = borrowBookAPi(bookArr);
       toast.promise(pending, { pending: "Please wait" });

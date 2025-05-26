@@ -119,9 +119,14 @@ const BookLandingPage = () => {
                     <Button
                       variant="dark"
                       onClick={handleOnAddCart}
-                      disabled={IsBookInCart}
+                      disabled={IsBookInCart || selectedBook.expectedAvailable}
                     >
-                      {IsBookInCart
+                      {selectedBook.expectedAvailable
+                        ? `Expected Available: ${selectedBook.expectedAvailable.slice(
+                            0,
+                            10
+                          )}`
+                        : IsBookInCart
                         ? "Book already exists in the Cart"
                         : "Add Book to Cart"}
                     </Button>
