@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { getAllBorrows } from "../../features/borrow/borrowAction";
+import {
+  getAllBorrows,
+  returnBookACtion,
+} from "../../features/borrow/borrowAction";
 
 const BorrowTable = ({ admin }) => {
   const dispatch = useDispatch();
@@ -24,6 +27,10 @@ const BorrowTable = ({ admin }) => {
 
   const handleOnSearch = (e) => {
     e.preventDefault();
+  };
+
+  const handleOnBookReturn = (_id) => {
+    dispatch(returnBookACtion({ _id }));
   };
 
   return (
@@ -91,7 +98,14 @@ const BorrowTable = ({ admin }) => {
                 {!pathname.includes("borrow") && (
                   <td>
                     {!isReturned && (
-                      <Button variant="warning">Return Book</Button>
+                      <Button
+                        variant="warning"
+                        onClick={() => {
+                          handleOnBookReturn(_id);
+                        }}
+                      >
+                        Return Book
+                      </Button>
                     )}
                     {isReturned && !reviewId && (
                       <Button variant="info">Leave Review</Button>

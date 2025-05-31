@@ -15,3 +15,15 @@ export const borrowBooksApi = async (admin) => {
   const result = await apiConnector(obj);
   return result;
 };
+
+// update book api
+export const returnBookApi = async (payload) => {
+  const obj = {
+    url: borrowAPi,
+    method: "patch",
+    isPrivateRoute: true,
+    payload,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};
