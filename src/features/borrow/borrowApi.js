@@ -16,7 +16,7 @@ export const borrowBooksApi = async (admin) => {
   return result;
 };
 
-// update book api
+// return book api
 export const returnBookApi = async (payload) => {
   const obj = {
     url: borrowAPi,

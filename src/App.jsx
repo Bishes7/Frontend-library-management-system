@@ -6,6 +6,7 @@ import AppRoutes from "./routes/AppRoutes";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAllUserBooks } from "./features/books/bookAction";
+import { ModalWrapper } from "./components/modelWrapper/ModalWrapper";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function App() {
     <>
       <AppRoutes />
       <ToastContainer />
+      <ModalWrapper />
     </>
   );
 }

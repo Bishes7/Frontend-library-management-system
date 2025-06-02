@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   getAllBorrows,
   returnBookACtion,
 } from "../../features/borrow/borrowAction";
+import { setModalShow } from "../../features/system/systemSlice";
 
 const BorrowTable = ({ admin }) => {
   const dispatch = useDispatch();
@@ -31,6 +32,10 @@ const BorrowTable = ({ admin }) => {
 
   const handleOnBookReturn = (_id) => {
     dispatch(returnBookACtion({ _id }));
+  };
+
+  const handleONLeaveReview = () => {
+    dispatch(setModalShow(true));
   };
 
   return (
@@ -95,7 +100,7 @@ const BorrowTable = ({ admin }) => {
                   </a>
                 </td>
 
-                {!pathname.includes("borrow") && (
+                {!admin && (
                   <td>
                     {!isReturned && (
                       <Button
@@ -108,9 +113,11 @@ const BorrowTable = ({ admin }) => {
                       </Button>
                     )}
                     {isReturned && !reviewId && (
-                      <Button variant="info">Leave Review</Button>
+                      <Button onClick={handleONLeaveReview} variant="info">
+                        Leave Review
+                      </Button>
                     )}
-                    {reviewId && "Reviewded"}
+                    {reviewId && "Reviewed"}
                   </td>
                 )}
               </tr>
