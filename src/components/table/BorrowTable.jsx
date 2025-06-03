@@ -6,7 +6,11 @@ import {
   getAllBorrows,
   returnBookACtion,
 } from "../../features/borrow/borrowAction";
-import { setModalShow } from "../../features/system/systemSlice";
+import {
+  setModalContent,
+  setModalShow,
+} from "../../features/system/systemSlice";
+import ReviewForm from "../forms/ReviewForm";
 
 const BorrowTable = ({ admin }) => {
   const dispatch = useDispatch();
@@ -34,7 +38,13 @@ const BorrowTable = ({ admin }) => {
     dispatch(returnBookACtion({ _id }));
   };
 
-  const handleONLeaveReview = () => {
+  const handleONLeaveReview = (obj) => {
+    dispatch(
+      setModalContent({
+        content: <ReviewForm borrowData={obj} />,
+        title: <h3>Leave a Review</h3>,
+      })
+    );
     dispatch(setModalShow(true));
   };
 
@@ -72,6 +82,7 @@ const BorrowTable = ({ admin }) => {
                 thumbnail,
                 reviewId,
                 bookSlug,
+                bookId,
               },
               i
             ) => (
@@ -113,7 +124,10 @@ const BorrowTable = ({ admin }) => {
                       </Button>
                     )}
                     {isReturned && !reviewId && (
-                      <Button onClick={handleONLeaveReview} variant="info">
+                      <Button
+                        onClick={() => handleONLeaveReview({ _id, bookId })}
+                        variant="info"
+                      >
                         Leave Review
                       </Button>
                     )}
