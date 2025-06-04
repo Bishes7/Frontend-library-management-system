@@ -3,8 +3,11 @@ import useForm from "../../hooks/useForm";
 import { Button, Form } from "react-bootstrap";
 import { reviewTemplate } from "../../assets/custominputs/reviewTemplate";
 import CustomInput from "../custominput/CustomInput";
+import { useDispatch } from "react-redux";
+import { postNewReview } from "../../features/review/reviewAction";
 
 const ReviewForm = ({ borrowData }) => {
+  const dispatch = useDispatch();
   const initialState = {};
   const { form, setForm, handleOnChange } = useForm(initialState);
 
@@ -16,7 +19,8 @@ const ReviewForm = ({ borrowData }) => {
       borrowId: borrowData._id,
       bookId: borrowData.bookId,
     };
-    console.log(form);
+    // call review api from action
+    dispatch(postNewReview(payload));
   };
 
   return (
