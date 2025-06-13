@@ -1,44 +1,35 @@
 import React from "react";
-import Star from "../../../components/star/star";
+
 import { formatDistanceToNow } from "date-fns";
+import Star from "../../../components/star/star";
 
-const reviews = [
-  {
-    title: "Awesome Book",
-    rating: 4.6,
-    details:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit voluptatem distinctio dolore eaque ipsam ipsum",
-    createdAt: "2-02-2025",
-    reviewdBy: "Name",
-  },
-];
-
-const Reviews = () => {
+const Reviews = ({ reviewsArr }) => {
   return (
     <div className="reviews-tab">
-      {reviews.map((review, i) => (
+      {reviewsArr.map((r, i) => (
         <div
           key={i}
           className=" border rounded shadow-lg p-3 d-flex review-item gap-5 "
         >
           <div className="left d-flex align-items-center justify-content-center">
             <div className="rounded-circle d-flex align-items-center justify-content-center fw-bold fs-3 ">
-              PA
+              {r.userName.split(" ")[0][0].toUpperCase()}
+              {r.userName.split(" ").at(-1)[0].toUpperCase()}
             </div>
           </div>
           <div className="right">
-            <h3>{review.title}</h3>
+            <h3>{r.title}</h3>
             <div className="d-flex gap-3">
-              <Star avgRating={review.rating} />
+              <Star avgRating={r.rating} />
               <span>
-                {formatDistanceToNow(new Date(review.createdAt), {
+                {formatDistanceToNow(new Date(r.createdAt), {
                   addSuffix: true,
                 })}
               </span>
             </div>
 
-            <p>{review.details}</p>
-            <div className="text-end">-{review.reviewdBy}</div>
+            <p>{r.reviewMessage}</p>
+            <div className="text-end">-{r.userName}</div>
           </div>
         </div>
       ))}

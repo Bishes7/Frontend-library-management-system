@@ -29,6 +29,7 @@ const BookLandingPage = () => {
   // const { publicBook } = useSelector((state) => state.bookInfo);
   const { selectedBook } = useSelector((state) => state.bookInfo);
   const { cartItem } = useSelector((state) => state.cartInfo);
+  const { reviews } = useSelector((state) => state.reviewInfo);
 
   useEffect(() => {
     // First Approach Locally
@@ -46,6 +47,12 @@ const BookLandingPage = () => {
 
   const IsBookInCart = cartItem.find((book) => book._id === selectedBook._id);
 
+  const bookReviews = reviews.filter(
+    (r) => r.bookId?._id === selectedBook?._id
+  );
+
+  const avgRating =
+    bookReviews.reduce((acc, r) => acc + r.rating, 0) / bookReviews.length;
   return (
     <Container>
       <Row className="my-2">
@@ -109,7 +116,7 @@ const BookLandingPage = () => {
                   </div>
                   <div className="my-2">
                     <span>{selectedBook.genre}</span>
-                    <Star avgRating={2} />
+                    <Star avgRating={avgRating} />
                   </div>
                   <div>{selectedBook.description.slice(0, 300)}...</div>
                 </div>
@@ -149,7 +156,7 @@ const BookLandingPage = () => {
                   <div>{selectedBook.description}</div>
                 </Tab>
                 <Tab eventKey="reviews" title="reviews">
-                  <Reviews />
+                  <Reviews reviewsArr={bookReviews} />
                 </Tab>
               </Tabs>
             </Col>
