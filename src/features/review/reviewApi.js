@@ -17,12 +17,24 @@ export const reviewApiEp = async (payload) => {
 
 //  fetch all reviews from the database
 
-export const fetchReviewApi = async (isAdmin) => {
-  const path = isAdmin ? "/admin" : "";
+export const fetchReviewApi = async (admin) => {
+  const path = admin ? "/admin" : "";
   const obj = {
     url: reviewApi + path,
     method: "get",
-    isPrivateRoute: isAdmin,
+    isPrivateRoute: admin,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};
+
+// update review status API
+export const updateReviewApi = async (payload) => {
+  const obj = {
+    url: reviewApi + "/admin",
+    method: "patch",
+    isPrivateRoute: true,
+    payload,
   };
   const result = await apiConnector(obj);
   return result;

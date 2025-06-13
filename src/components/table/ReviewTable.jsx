@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSelectedReviews } from "../../features/review/reviewAction";
 
 export const ReviewTable = () => {
+  const dispatch = useDispatch();
   const { reviews } = useSelector((state) => state.reviewInfo);
+  const { user } = useSelector((state) => state.userInfo);
 
   const [displayReview, setDisplayReview] = useState([]);
 
   useEffect(() => {
     setDisplayReview(reviews);
   }, [reviews]);
+
+  // function for switch  button
+  const handleOnStatusUpdate = (obj) => {
+    if (confirm("Do you want to change the status of review")) {
+      dispatch(updateSelectedReviews(user?.role === "admin", obj));
+    }
+  };
 
   return (
     <div>
@@ -46,7 +56,17 @@ export const ReviewTable = () => {
                   </div>
                 </td>
                 <td>
-                  <div>Status:{isApproved}</div>
+                  <div className={isApproved ? "text-success" : "text-danger"}>
+                    Status:
+                    <Form.Check
+                      type="switch"
+                      label={isApproved ? "Approved" : "Pending"}
+                      onChange={() =>
+                        handleOnStatusUpdate({ _id, isApproved: !isApproved })
+                      }
+                      checked={isApproved}
+                    />
+                  </div>
                   <div>Title:{title}</div>
                   <div>Message:{reviewMessage}</div>
                   <div>Ratings:{rating}</div>
