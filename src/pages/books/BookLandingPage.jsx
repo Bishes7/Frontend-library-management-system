@@ -19,30 +19,32 @@ import { toast } from "react-toastify";
 
 const BookLandingPage = () => {
   const { slug } = useParams();
-
-  const [showImg, setShowImg] = useState(0);
-
   const dispatch = useDispatch();
 
-  // const [clickedBook, setClickedBook] = useState({});
+  const [showImg, setShowImg] = useState(0);
+  const [loader, setLoader] = useState(true);
 
-  // const { publicBook } = useSelector((state) => state.bookInfo);
   const { selectedBook } = useSelector((state) => state.bookInfo);
   const { cartItem } = useSelector((state) => state.cartInfo);
   const { reviews } = useSelector((state) => state.reviewInfo);
 
   useEffect(() => {
-    // First Approach Locally
-    // const selectedBook = publicBook.find((book) => book.slug === slug);
-    // setClickedBook(selectedBook);
+    const fetchBook = async () => {
+      setLoader(true);
+      try {
+        await dispatch(getOnlySelectedBook(slug));
+      } catch (error) {
+        console.error("Failed to fetch book:", error);
+      }
+      setLoader(false);
+    };
 
-    // Second Approach- Fetch from server
-    dispatch(getOnlySelectedBook(slug));
+    fetchBook();
   }, [dispatch, slug]);
 
   const handleOnAddCart = () => {
     dispatch(setCartItem(selectedBook));
-    toast.info("Book Successfully added in the cart");
+    toast.info("Book successfully added to the cart");
   };
 
   const IsBookInCart = cartItem.find((book) => book._id === selectedBook._id);
@@ -52,7 +54,22 @@ const BookLandingPage = () => {
   );
 
   const avgRating =
-    bookReviews.reduce((acc, r) => acc + r.rating, 0) / bookReviews.length;
+    bookReviews.reduce((acc, r) => acc + r.rating, 0) / bookReviews.length || 0;
+
+  if (loader) {
+    return (
+      <Container>
+        <Row className="justify-content-center py-5">
+          <Col className="text-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Row className="my-2">
@@ -68,7 +85,8 @@ const BookLandingPage = () => {
           </Breadcrumb>
         </Col>
       </Row>
-      {!selectedBook?._id && (
+
+      {!selectedBook?._id ? (
         <Row>
           <Col>
             <Alert variant="danger fw-bold">
@@ -76,9 +94,7 @@ const BookLandingPage = () => {
             </Alert>
           </Col>
         </Row>
-      )}
-
-      {selectedBook?._id && (
+      ) : (
         <>
           <Row>
             <Col md={4}>
@@ -89,11 +105,9 @@ const BookLandingPage = () => {
                     selectedBook?.imageList[showImg].slice(6)
                   }
                   alt={selectedBook.title}
-                  // width="100%"
                   className="h-100 w-100 object-fit-contain"
                 />
               </div>
-              {/* Scrollable THumbnails */}
               <div className="d-flex overflow-auto gap-2 py-2">
                 {selectedBook.imageList?.map((url, i) => (
                   <img
@@ -107,8 +121,9 @@ const BookLandingPage = () => {
                 ))}
               </div>
             </Col>
+
             <Col>
-              <div className="d-flex h-100 flex-column justify-content-between  ">
+              <div className="d-flex h-100 flex-column justify-content-between">
                 <div className="top">
                   <h1>{selectedBook.title}</h1>
                   <div className="fw-bold">
@@ -142,6 +157,7 @@ const BookLandingPage = () => {
               </div>
             </Col>
           </Row>
+
           <Row className="mt-5 mb-5">
             <Col className="border p-3 rounded shadow-lg">
               <h3 className="margin-auto mt-5 text-center">
@@ -155,7 +171,7 @@ const BookLandingPage = () => {
                 <Tab eventKey="description" title="Description">
                   <div>{selectedBook.description}</div>
                 </Tab>
-                <Tab eventKey="reviews" title="reviews">
+                <Tab eventKey="reviews" title="Reviews">
                   <Reviews reviewsArr={bookReviews} />
                 </Tab>
               </Tabs>
