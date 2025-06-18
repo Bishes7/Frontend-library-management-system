@@ -4,21 +4,20 @@ export const inputTemplate = [
     name: "fName",
     type: "text",
     required: true,
-    placeholder: "First Name",
   },
   {
     label: "Last Name",
     name: "lName",
     type: "text",
     required: true,
-    placeholder: "Last Name",
   },
   {
     label: "Email",
     name: "email",
     type: "email",
     required: true,
-    placeholder: "a@gmail.com",
+    placeholder: "example@email.com",
+    icon: "fas fa-envelope",
   },
   {
     label: "Password",
@@ -26,6 +25,8 @@ export const inputTemplate = [
     type: "password",
     required: true,
     placeholder: "*****",
+    icon: "fas fa-lock",
+    isPassword: true,
   },
   {
     label: "confirm Password",
@@ -33,5 +34,7 @@ export const inputTemplate = [
     type: "password",
     required: true,
     placeholder: "*****",
+    icon: "fas fa-lock",
+    isPassword: true,
   },
 ];

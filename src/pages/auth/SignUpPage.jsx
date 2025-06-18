@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import CustomInput from "../../components/custominput/CustomInput";
 import { inputTemplate } from "../../assets/custominputs/inputTemplate";
 import useForm from "../../hooks/useForm";
 import { signUpApi } from "../../services/authApiConnector";
+import { Spinner } from "react-bootstrap";
 
 const SignUpPage = () => {
   const initialState = {
@@ -15,55 +16,75 @@ const SignUpPage = () => {
     confirmPassword: "",
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const { form, setForm, handleOnChange, passwordErrors } =
     useForm(initialState); // destrucutured useFOrm hook
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+
     // destructure names from form
     const { confirmPassword, ...rest } = form;
     if (confirmPassword !== rest.password) return alert("Password dont match");
-
+    setIsLoading(true);
     const result = await signUpApi(rest);
-    console.log(result);
 
     result.status === "success" && setForm(initialState);
+    setIsLoading(false);
   };
   return (
-    <div className="d-flex justify-content-center">
-      <Form
-        style={{ width: "450px" }}
-        className="card p-4 mt-4 shadow-lg rounded-4 mb-5"
-        onSubmit={handleOnSubmit}
-      >
-        <h1>Explore our Library!</h1>
-        <hr />
-
-        {inputTemplate.map((input) => (
-          <CustomInput
-            key={input.name}
-            {...input}
-            value={form[input.name]}
-            onChange={handleOnChange}
-          />
-        ))}
-
-        <div className="py-3">
-          <ul className="text-danger">
-            {passwordErrors.length > 0 &&
-              passwordErrors.map((message) => <li key={message}>{message}</li>)}
-          </ul>
-        </div>
-
-        <Button
-          variant="primary"
-          type="submit"
-          disabled={passwordErrors.length}
+    <div className="d-flex justify-content-center align-items-center signup-wrapper">
+      <div className="bg-blur"></div>
+      <div className="blur-area position-relative">
+        <Form
+          className="glass-card p-4 mt-2 shadow-lg rounded-4 mb-4 "
+          onSubmit={handleOnSubmit}
         >
-          Submit
-        </Button>
-      </Form>
+          <h4 className="text-center mb-1 text-light">Explore our Library!</h4>
+
+          <hr />
+
+          {inputTemplate.map((input) => (
+            <CustomInput
+              key={input.name}
+              {...input}
+              value={form[input.name]}
+              onChange={handleOnChange}
+            />
+          ))}
+
+          <div className="py-3">
+            <ul className="text-white small">
+              {passwordErrors.map((message) => (
+                <li key={message}>{message}</li>
+              ))}
+            </ul>
+          </div>
+
+          <Button
+            type="submit"
+            variant="dark"
+            disabled={isLoading}
+            className="w-100"
+          >
+            {isLoading ? (
+              <>
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />{" "}
+                Loading...
+              </>
+            ) : (
+              "Create New Account"
+            )}
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 };

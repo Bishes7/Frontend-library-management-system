@@ -73,12 +73,12 @@ const LogInPage = () => {
 
   return (
     <div className="login-wrapper position-relative vh-100">
-      <div className="bg-blur"></div> {/* ✅ Blur layer for background only */}
+      <div className="bg-blur"></div> {/*  Blur layer for background only */}
       <div className="login-content d-flex justify-content-center align-items-center vh-100 position-relative">
         <Container>
           <Row className="justify-content-center">
             <Col xs={12} md={8} lg={4}>
-              <Card className="glass-card animate-login">
+              <Card className="card animate-login">
                 <Card.Body>
                   <Card.Title className="text-center mb-3">
                     <b>Welcome Back!</b>
