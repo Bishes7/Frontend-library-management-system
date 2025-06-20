@@ -15,3 +15,14 @@ export const fetchUserApi = async () => {
   console.log(result);
   return result;
 };
+
+// fetch weekly user stats
+export const fetchWeeklyUserStats = async () => {
+  const obj = {
+    url: userApi + "/stats/weekly",
+    method: "get",
+    isPrivateRoute: true,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};

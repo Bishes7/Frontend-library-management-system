@@ -41,7 +41,7 @@ const SignUpPage = () => {
           className="glass-card p-4 mt-2 shadow-lg rounded-4 mb-4 "
           onSubmit={handleOnSubmit}
         >
-          <h4 className="text-center mb-1 text-light">Explore our Library!</h4>
+          <h3 className="text-center mb-1 text-light">Explore our Library!</h3>
 
           <hr />
 

@@ -27,3 +27,14 @@ export const returnBookApi = async (payload) => {
   const result = await apiConnector(obj);
   return result;
 };
+
+// fetch borrow stats
+export const borrowStatsApi = async () => {
+  const obj = {
+    url: borrowAPi + "/stats/weekly",
+    method: "get",
+    isPrivateRoute: true,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};

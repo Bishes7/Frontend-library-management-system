@@ -81,7 +81,7 @@ const LogInPage = () => {
               <Card className="card animate-login">
                 <Card.Body>
                   <Card.Title className="text-center mb-3">
-                    <b>Welcome Back!</b>
+                    <h4>Welcome Back!</h4>
                   </Card.Title>
                   <hr />
                   <Form onSubmit={handleOnSubmit} className="form">

@@ -178,3 +178,14 @@
   transition: all 0.5s;
   color: white;
 }
+
+/* dashboard */
+.card {
+  border-radius: 12px;
+  transition: 0.3s ease-in-out;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* dashboard */

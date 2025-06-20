@@ -1,11 +1,40 @@
 import React from "react";
+import { Col, Row } from "react-bootstrap";
+import { BorrowChart } from "../../components/charts/BorrowChart";
+import UserSignUpChart from "../../components/charts/UserSignUpChart";
+import BookCatagoryPieChart from "../../components/charts/BookCatagoryPieChart";
+import RecentBooksTable from "../../components/charts/RecentBooksTable";
+import BorrowStatusDonutChart from "../../components/charts/BorrowStatusDonutChart";
 
-const Dashboard = () => {
+export const Dashboard = () => {
   return (
-    <div>
-      <div className="p-3 fw-bold bg">Dashboard</div>
-      <hr className="hr-book" />
-    </div>
+    <Row className="mt-2">
+      <Col md={6}>
+        <div className="bg-dark p-3 rounded shadow">
+          <BorrowChart />
+        </div>
+      </Col>
+      <Col md={4}>
+        <div className="bg-dark p-4 rounded shadow mb-4">
+          <UserSignUpChart />
+        </div>
+      </Col>
+      <Col md={2}>
+        <div className="bg-dark p-3 rounded shadow mb-4">
+          <BookCatagoryPieChart />
+        </div>
+      </Col>
+      <Row>
+        <Col md={4}>
+          <RecentBooksTable />
+        </Col>
+        <Col md={4}>
+          <div className="bg-dark p-4 rounded shadow mb-4">
+            <BorrowStatusDonutChart />
+          </div>
+        </Col>
+      </Row>
+    </Row>
   );
 };
 
