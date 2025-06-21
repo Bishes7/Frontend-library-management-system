@@ -1,5 +1,6 @@
 // call apiConnector to fetch the data
 
+import { useEffect } from "react";
 import { apiConnector } from "../../services/apiConnector";
 
 const apiBaseUrl = import.meta.env.VITE_BASE_URl;
@@ -72,6 +73,17 @@ export const getSelectedBook = async (slug) => {
   const obj = {
     url: bookApi + "/public/" + slug,
     method: "get",
+  };
+  const result = await apiConnector(obj);
+  return result;
+};
+
+// APi to fetch book chart stats
+export const fetchBookCategoryStats = async () => {
+  const obj = {
+    url: bookApi + "/stats/categories",
+    method: "get",
+    isPrivateRoute: true,
   };
   const result = await apiConnector(obj);
   return result;

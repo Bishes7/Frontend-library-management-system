@@ -34,7 +34,6 @@ export const BorrowChart = () => {
     const getData = async () => {
       try {
         const response = await borrowStatsApi();
-
         const { labels, data } = response;
 
         setChartData({

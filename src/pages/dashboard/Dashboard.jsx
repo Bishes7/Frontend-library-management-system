@@ -9,7 +9,7 @@ import BorrowStatusDonutChart from "../../components/charts/BorrowStatusDonutCha
 export const Dashboard = () => {
   return (
     <Row className="mt-2">
-      <Col md={6}>
+      <Col md={4}>
         <div className="bg-dark p-3 rounded shadow">
           <BorrowChart />
         </div>
@@ -19,7 +19,7 @@ export const Dashboard = () => {
           <UserSignUpChart />
         </div>
       </Col>
-      <Col md={2}>
+      <Col md={4}>
         <div className="bg-dark p-3 rounded shadow mb-4">
           <BookCatagoryPieChart />
         </div>
