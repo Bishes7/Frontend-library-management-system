@@ -20,5 +20,16 @@ export const getRecentBooksApi = async () => {
     isPrivateRoute: true,
   };
   const result = await apiConnector(obj);
+
+  return result;
+};
+
+// api to fetch dashboard stats
+export const fetchDashboardStats = async () => {
+  const obj = {
+    url: borrowStatsAPi + "/dashboard-stats",
+    isPrivateRoute: true,
+  };
+  const result = await apiConnector(obj);
   return result;
 };

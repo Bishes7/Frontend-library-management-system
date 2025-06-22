@@ -5,36 +5,41 @@ import UserSignUpChart from "../../components/charts/UserSignUpChart";
 import BookCatagoryPieChart from "../../components/charts/BookCatagoryPieChart";
 import RecentBooksTable from "../../components/charts/RecentBooksTable";
 import BorrowStatusDonutChart from "../../components/charts/BorrowStatusDonutChart";
+import DashBoardSummaryStats from "../../components/dashboardSumamryStats/DashBoardSummaryStats";
 
 export const Dashboard = () => {
   return (
-    <Row className="mt-2">
-      <Col md={4}>
-        <div className="bg-dark p-3 rounded shadow">
-          <BorrowChart />
+    <div className="container mt-4">
+      <div>
+        <DashBoardSummaryStats />
+      </div>
+
+      <div className="row g-4">
+        <div className="col-md-4">
+          <div className="card p-3 shadow-sm">
+            <BorrowChart />
+          </div>
         </div>
-      </Col>
-      <Col md={4}>
-        <div className="bg-dark p-4 rounded shadow mb-4">
-          <UserSignUpChart />
+        <div className="col-md-4">
+          <div className="card p-3 shadow-sm">
+            <UserSignUpChart />
+          </div>
         </div>
-      </Col>
-      <Col md={4}>
-        <div className="bg-dark p-3 rounded shadow mb-4">
-          <BookCatagoryPieChart />
+        <div className="col-md-4">
+          <div className="card p-3 shadow-sm">
+            <BookCatagoryPieChart />
+          </div>
         </div>
-      </Col>
-      <Row>
-        <Col md={4}>
-          <RecentBooksTable />
-        </Col>
-        <Col md={4}>
-          <div className="bg-dark p-4 rounded shadow mb-4">
+      </div>
+
+      <div className="row g-4 mt-4">
+        <div className="col-md-6">
+          <div className="card p-3 shadow-sm">
             <BorrowStatusDonutChart />
           </div>
-        </Col>
-      </Row>
-    </Row>
+        </div>
+      </div>
+    </div>
   );
 };
 
