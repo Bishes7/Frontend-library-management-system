@@ -61,21 +61,26 @@ export const UserSignUpChart = () => {
     responsive: true,
     plugins: {
       legend: {
-        labels: { color: "white" },
+        labels: {
+          color: "#fff",
+          font: { size: 14 },
+        },
       },
       title: {
         display: true,
         text: "Weekly User Signups",
-        color: "white",
-        font: { size: 18 },
+        color: "#fff",
+        font: { size: 16, weight: "bold" },
       },
     },
     scales: {
       x: {
-        ticks: { color: "white" },
+        ticks: { color: "#fff" },
+        grid: { color: "rgba(255,255,255,0.1)" },
       },
       y: {
-        ticks: { color: "white" },
+        ticks: { color: "#fff" },
+        grid: { color: "rgba(255,255,255,0.1)" },
       },
     },
   };

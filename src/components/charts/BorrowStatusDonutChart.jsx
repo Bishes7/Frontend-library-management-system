@@ -14,7 +14,7 @@ const BorrowStatusDonutChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchborrowChartStatus(); // ✅ calls correct API
+        const response = await fetchborrowChartStatus();
 
         setChartData({
           labels: response.labels,
@@ -37,25 +37,27 @@ const BorrowStatusDonutChart = () => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    cutout: "60%", // makes it donut
     plugins: {
       legend: {
         position: "bottom",
         labels: {
           color: "#fff",
-          font: { size: 12 },
+          font: { size: 13 },
+          boxWidth: 18,
+          padding: 10,
         },
       },
+      title: {
+        display: true,
+        text: "Borrow Status",
+        color: "#fff",
+        font: { size: 16, weight: "bold" },
+      },
     },
-    cutout: "70%",
   };
 
-  return (
-    <div style={{ height: "300px" }}>
-      <h5 className="text-center">Borrow Status</h5>
-      <Doughnut data={chartData} options={options} />
-    </div>
-  );
+  return <Doughnut data={chartData} options={options} />;
 };
 
 export default BorrowStatusDonutChart;

@@ -54,16 +54,28 @@ const BookCatagoryPieChart = () => {
     responsive: true,
     plugins: {
       legend: {
-        labels: { color: "white" },
+        position: "bottom",
+        labels: {
+          color: "#fff",
+          font: {
+            size: 10,
+          },
+          boxWidth: 9,
+          padding: 10,
+        },
       },
       title: {
         display: true,
         text: "Book Categories",
-        color: "white",
-        font: { size: 18 },
+        color: "#fff",
+        font: {
+          size: 16,
+          weight: "bold",
+        },
       },
     },
   };
+
   return <Pie data={chartData} options={options} />;
 };
 

@@ -55,21 +55,30 @@ export const BorrowChart = () => {
   }, []);
 
   const options = {
-    resposive: true,
+    responsive: true,
     plugins: {
       legend: {
-        labels: { color: "white" },
+        labels: {
+          color: "#fff",
+          font: { size: 14 },
+        },
       },
       title: {
         display: true,
         text: "Weekly Book Borrows",
-        color: "white",
-        font: { size: 18 },
+        color: "#fff",
+        font: { size: 16, weight: "bold" },
       },
     },
     scales: {
-      x: { ticks: { color: "white" } },
-      y: { ticks: { color: "white" } },
+      x: {
+        ticks: { color: "#fff" },
+        grid: { color: "rgba(255,255,255,0.1)" },
+      },
+      y: {
+        ticks: { color: "#fff" },
+        grid: { color: "rgba(255,255,255,0.1)" },
+      },
     },
   };
 
