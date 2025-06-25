@@ -1,10 +1,11 @@
 import React from "react";
-import ChangePassword from "../../components/changePassword/ChangePassword";
+
+import AdminProfile from "../../components/changePassword/AdminProfile";
 
 const Profile = () => {
   return (
     <div>
-      <ChangePassword />
+      <AdminProfile />
     </div>
   );
 };
