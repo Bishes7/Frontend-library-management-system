@@ -83,3 +83,16 @@ export const UpdatePassword = async (payload) => {
   };
   return apiConnector(obj);
 };
+
+// Change password Api
+export const changePasswordApi = async (payload) => {
+  const obj = {
+    url: authApi + "/change-password",
+    method: "patch",
+    payload,
+    isPrivateRoute: true,
+    showToast: true,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};

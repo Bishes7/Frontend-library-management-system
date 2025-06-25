@@ -49,7 +49,7 @@ export const apiConnector = async ({
     showToast && toast.error(message);
 
     // if jwt is expired
-    if (error.status === 401) {
+    if (error?.response?.status === 401) {
       if (message === "jwt expired") {
         // calling api to get new access jwt
         const { payload } = await getaccessJWT();

@@ -288,3 +288,7 @@ body {
   border-right: 3px solid #4e56c8ab;
   animation: typing 2.5s steps(30, end), blink 0.75s step-end infinite;
 }
+
+button:hover {
+  transform: scale(1.02);
+}

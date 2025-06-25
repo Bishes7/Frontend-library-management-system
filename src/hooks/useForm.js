@@ -15,15 +15,20 @@ const handleOnChange = ({ e, form, setForm }) => {
   });
 };
 
-const useForm = (initialState) => {
+const useForm = (initialState, type = "default") => {
   const [form, setForm] = useState(initialState);
   const [passwordErrors, setPasswordErrors] = useState([]); // state to store the errors
 
   //only when password and confirm password changes
   useEffect(() => {
-    const errorList = validator(form.password, form.confirmPassword);
-    setPasswordErrors(errorList);
-  }, [form.password, form.confirmPassword]);
+    if (type === "changePassword") {
+      const errorList = validator(form.newPassword, form.confirmPassword);
+      setPasswordErrors(errorList);
+    } else {
+      const errorList = validator(form.password, form.confirmPassword);
+      setPasswordErrors(errorList);
+    }
+  }, [form.password, form.confirmPassword, form.newPassword]);
 
   return {
     form,
