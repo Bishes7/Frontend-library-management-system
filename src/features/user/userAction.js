@@ -1,6 +1,6 @@
 import { getaccessJWT } from "../../services/authApiConnector";
-import { fetchUserApi } from "./userApi";
-import { setUser } from "./userSLice";
+import { fetchAllUsersApi, fetchUserApi } from "./userApi";
+import { setAllUsers, setUser } from "./userSLice";
 
 export const fetchUserAction = () => async (dispatch) => {
   // call api
@@ -30,4 +30,10 @@ export const autoLogin = () => async (dispatch) => {
       dispatch(fetchUserAction());
     }
   }
+};
+
+// call api to fetch all users
+export const fetchAllUsers = () => async (dispatch) => {
+  const { status, payload } = await fetchAllUsersApi();
+  status === "success" && dispatch(setAllUsers(payload));
 };

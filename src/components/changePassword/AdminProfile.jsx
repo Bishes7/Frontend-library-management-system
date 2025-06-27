@@ -66,13 +66,13 @@ const AdminProfile = () => {
     try {
       const response = await changePasswordApi(form);
       const { status, message } = response;
-      toast[status](message);
       if (status === "success") {
+        toast[status](message);
         setForm({ ...initialState });
         handleClose();
       }
     } catch (error) {
-      toast.error(error.message || "Something went wrong");
+      toast.error(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -207,7 +207,7 @@ const AdminProfile = () => {
                     </Form.Group>
 
                     {passwordErrors.length > 0 && (
-                      <Alert variant="warning" className="small mt-2">
+                      <Alert variant="danger" className="small mt-2">
                         <ul className="mb-0 ps-3">
                           {passwordErrors.map((err, i) => (
                             <li key={i}>{errorMessages[err] || err}</li>

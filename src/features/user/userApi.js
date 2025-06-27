@@ -26,3 +26,15 @@ export const fetchWeeklyUserStats = async () => {
   const result = await apiConnector(obj);
   return result;
 };
+
+// get all users
+
+export const fetchAllUsersApi = async () => {
+  const obj = {
+    url: userApi + "/all-users",
+    method: "get",
+    isPrivateRoute: true,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};

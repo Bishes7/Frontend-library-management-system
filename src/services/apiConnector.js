@@ -45,7 +45,7 @@ export const apiConnector = async ({
 
     return data;
   } catch (error) {
-    const message = error?.response?.data?.message || error.message;
+    const message = error?.response?.data?.message;
     showToast && toast.error(message);
 
     // if jwt is expired
