@@ -16,10 +16,15 @@ const userSLice = createSlice({
     setAllUsers: (state, action) => {
       state.allUsers = action.payload;
     },
+    setDeleteUser: (state, action) => {
+      state.allUsers = state.allUsers.filter(
+        (user) => user._id !== action.payload
+      );
+    },
   },
 });
 
 const { reducer, actions } = userSLice;
 
-export const { setUser, setAllUsers } = actions;
+export const { setUser, setAllUsers, setDeleteUser } = actions;
 export default reducer;
