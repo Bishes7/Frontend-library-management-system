@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 
 export const Dashboard = () => {
   const { user } = useSelector((state) => state.userInfo);
+  const isAdmin = user?.role === "admin";
 
   return (
     <div className="container mt-2 fade-in">
@@ -24,30 +25,42 @@ export const Dashboard = () => {
           />
         </h3>
       </div>
-      <DashBoardSummaryStats />
 
-      <div className="row g-3 mt-3">
-        <div className="col-lg-3 col-md-6">
-          <div className="equal-height-card p-3 shadow-sm fade-in">
-            <BorrowChart />
+      {isAdmin ? (
+        <>
+          <DashBoardSummaryStats />
+
+          <div className="row g-3 mt-3">
+            <div className="col-lg-3 col-md-6">
+              <div className="equal-height-card p-3 shadow-sm fade-in">
+                <BorrowChart />
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 fade-in">
+              <div className="equal-height-card p-3 shadow-sm fade-in">
+                <UserSignUpChart />
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6">
+              <div className="equal-height-card p-3 shadow-sm fade-in">
+                <BookCatagoryPieChart />
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6">
+              <div className="equal-height-card p-3 shadow-sm fade-in">
+                <BorrowStatusDonutChart />
+              </div>
+            </div>
           </div>
+        </>
+      ) : (
+        <div className="text-center mt-4 fade-in">
+          <h4>Enjoy Exploring and borrowing books</h4>
+          <p>
+            You can view your book list, update your profile and search books
+          </p>
         </div>
-        <div className="col-lg-3 col-md-6 fade-in">
-          <div className="equal-height-card p-3 shadow-sm fade-in">
-            <UserSignUpChart />
-          </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-          <div className="equal-height-card p-3 shadow-sm fade-in">
-            <BookCatagoryPieChart />
-          </div>
-        </div>
-        <div className="col-lg-3 col-md-6">
-          <div className="equal-height-card p-3 shadow-sm fade-in">
-            <BorrowStatusDonutChart />
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
