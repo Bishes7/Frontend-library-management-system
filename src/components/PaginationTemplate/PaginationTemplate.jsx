@@ -15,8 +15,8 @@ const PaginationTemplate = ({ pages, active, setActive }) => {
     );
   }
   return (
-    <div className="pagination d-flex justify-content-center mt-3">
-      <Pagination>{items}</Pagination>
+    <div className=" d-flex justify-content-center mt-4">
+      <Pagination className="pagination-rounded shadow-sm">{items}</Pagination>
     </div>
   );
 };

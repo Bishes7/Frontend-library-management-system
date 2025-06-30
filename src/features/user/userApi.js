@@ -12,7 +12,7 @@ export const fetchUserApi = async () => {
     isPrivateRoute: true,
   };
   const result = await apiConnector(obj);
-  console.log(result);
+
   return result;
 };
 
@@ -58,6 +58,29 @@ export const updateUserStatusAPi = async (id) => {
     method: "patch",
     isPrivateRoute: true,
     showToast: true,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};
+
+// Update User Role
+export const updateUserRoleApi = async (id) => {
+  const obj = {
+    url: `${userApi}/role/${id}`,
+    method: "patch",
+    isPrivateRoute: true,
+    showToast: true,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};
+
+// get Single User
+export const getUserProfileApi = async (id) => {
+  const obj = {
+    method: "get",
+    url: `${userApi}/${id}`,
+    isPrivateRoute: true,
   };
   const result = await apiConnector(obj);
   return result;

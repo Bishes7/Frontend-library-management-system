@@ -3,6 +3,7 @@ import {
   deleteUserApi,
   fetchAllUsersApi,
   fetchUserApi,
+  updateUserRoleApi,
   updateUserStatusAPi,
 } from "./userApi";
 import { setAllUsers, setDeleteUser, setUser } from "./userSLice";
@@ -50,8 +51,15 @@ export const deleteSelectedUser = (_id) => async (dispatch) => {
   status === "success" && dispatch(setDeleteUser(_id));
 };
 
-// call the api to update the status
+// call the api to update the user status
 export const updateUserStatusAction = (_id) => async (dispatch) => {
   const { status } = await updateUserStatusAPi(_id);
+  status === "success" && dispatch(fetchAllUsers());
+};
+
+// call Api to update the user role
+export const updateUserRoleAction = (_id) => async (dispatch) => {
+  const { status } = await updateUserRoleApi(_id);
+
   status === "success" && dispatch(fetchAllUsers());
 };

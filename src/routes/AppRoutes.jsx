@@ -25,6 +25,7 @@ import CartPage from "../pages/cart/CartPage";
 import ThankyouPage from "../pages/thankyouPage/ThankyouPage";
 import { useSelector } from "react-redux";
 import { Alert } from "react-bootstrap";
+import UserProfile from "../pages/users/UserProfile";
 
 const noAccess = (
   <Alert variant="danger" className="p-3 text-center fw-bold fs-3">
@@ -58,6 +59,7 @@ const AppRoutes = () => {
 
         <Route path="my-borrow" element={<Borrow />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="/user/:id" element={<UserProfile />} />
         <Route path="thankyou" element={<ThankyouPage />} />
 
         {/* Only admin access pages */}
