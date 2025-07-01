@@ -6,6 +6,7 @@ import BorrowStatusDonutChart from "../../components/charts/BorrowStatusDonutCha
 import DashBoardSummaryStats from "../../components/dashboardSumamryStats/DashBoardSummaryStats";
 import Typewriter from "typewriter-effect";
 import { useSelector } from "react-redux";
+import UserDashboardContent from "../../features/user/UserDashboardContent";
 
 export const Dashboard = () => {
   const { user } = useSelector((state) => state.userInfo);
@@ -54,11 +55,8 @@ export const Dashboard = () => {
           </div>
         </>
       ) : (
-        <div className="text-center mt-4 fade-in">
-          <h4>Enjoy Exploring and borrowing books</h4>
-          <p>
-            You can view your book list, update your profile and search books
-          </p>
+        <div>
+          <UserDashboardContent />
         </div>
       )}
     </div>

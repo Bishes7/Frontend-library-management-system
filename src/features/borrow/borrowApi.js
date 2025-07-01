@@ -38,3 +38,14 @@ export const borrowStatsApi = async () => {
   const result = await apiConnector(obj);
   return result;
 };
+
+// user weekly borrow stats
+export const fetchUserWeeklyBorrStats = async () => {
+  const obj = {
+    url: borrowAPi + "/borrow-chart",
+    method: "get",
+    isPrivateRoute: true,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};
