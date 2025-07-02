@@ -85,3 +85,16 @@ export const getUserProfileApi = async (id) => {
   const result = await apiConnector(obj);
   return result;
 };
+
+// upload profile image
+export const uploadProfileImageApi = async (payload) => {
+  const obj = {
+    method: "patch",
+    url: userApi + "/upload-profile",
+    isPrivateRoute: true,
+    showToast: true,
+    payload,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};
