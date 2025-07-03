@@ -3,8 +3,15 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { uploadProfileImageApi } from "../../features/user/userApi";
 import { toast } from "react-toastify";
+import ChangePasswordModal from "../../components/changePassword/ChangePasswordModal";
 
 const UserProfilePage = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  // pop up modal
+  const handleOnShow = () => setShowModal(true);
+  const handleOnClose = () => setShowModal(false);
+
   const BACKEND_URL = import.meta.env.VITE_BASE_URl || "http://localhost:8000";
   const { user } = useSelector((state) => state.userInfo);
   const fileInputRef = useRef();
@@ -76,26 +83,28 @@ const UserProfilePage = () => {
             md={6}
             className="d-flex align-items-center justify-content-center"
           >
-            <img
-              src={imagePreview}
-              alt="Profile"
-              className="img-thumbnail"
-              style={{
-                width: "150px",
-                height: "150px",
-                borderRadius: "50%",
-                objectFit: "cover",
-              }}
-              onClick={() => fileInputRef.current.click()}
-            />
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              onChange={handleImageUpload}
-              style={{ display: "none" }}
-            />
-            <small className="text-muted">Click image to upload</small>
+            <div style={{ cursor: "pointer" }}>
+              <img
+                src={imagePreview}
+                alt="Profile"
+                className="img-thumbnail"
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
+                onClick={() => fileInputRef.current.click()}
+              />
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                onChange={handleImageUpload}
+                style={{ display: "none" }}
+              />
+              <p className="text-muted mt-2">Click image to upload</p>
+            </div>
           </Col>
         </Row>
 
@@ -103,9 +112,12 @@ const UserProfilePage = () => {
           <Button variant="primary" className="me-3">
             Edit Profile
           </Button>
-          <Button variant="warning">Change Password</Button>
+          <Button variant="warning" onClick={handleOnShow}>
+            Change Password
+          </Button>
         </div>
       </Card>
+      <ChangePasswordModal show={showModal} onHide={handleOnClose} />
     </div>
   );
 };
