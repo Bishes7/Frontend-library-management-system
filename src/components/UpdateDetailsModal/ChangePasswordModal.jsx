@@ -11,21 +11,12 @@ const ChangePasswordModal = ({ show, onHide }) => {
     confirmPassword: "",
   };
   const [showPassword, setShowPassword] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const { form, setForm, handleOnChange, passwordErrors } = useForm(
     initialState,
     "changePassword"
   );
-
-  const errorMessages = {
-    minLength: "At least 6 characters required",
-    upperCase: "At least 1 UPPERCASE letter required",
-    lowercase: "At least 1 lowercase letter required",
-    number: "At least 1 number required",
-    specialChar: "At least 1 special character required",
-  };
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -59,6 +50,13 @@ const ChangePasswordModal = ({ show, onHide }) => {
     } finally {
       setIsLoading(false);
     }
+  };
+  const errorMessages = {
+    minLength: "At least 6 characters required",
+    upperCase: "At least 1 UPPERCASE letter required",
+    lowercase: "At least 1 lowercase letter required",
+    number: "At least 1 number required",
+    specialChar: "At least 1 special character required",
   };
 
   return (
@@ -120,7 +118,7 @@ const ChangePasswordModal = ({ show, onHide }) => {
             <Alert variant="danger" className="small mt-2">
               <ul className="ps-3">
                 {passwordErrors.map((err, i) => (
-                  <li key={i}>{errorMessages[err]}</li>
+                  <li key={i}>{errorMessages[err] || err}</li>
                 ))}
               </ul>
             </Alert>

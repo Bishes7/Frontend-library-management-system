@@ -98,3 +98,15 @@ export const uploadProfileImageApi = async (payload) => {
   const result = await apiConnector(obj);
   return result;
 };
+
+// update profile details
+export const updateProfileDetailsApi = async (payload) => {
+  const obj = {
+    method: "patch",
+    url: userApi + "/update-profile",
+    isPrivateRoute: true,
+    payload,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};

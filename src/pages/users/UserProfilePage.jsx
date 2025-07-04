@@ -3,7 +3,8 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { uploadProfileImageApi } from "../../features/user/userApi";
 import { toast } from "react-toastify";
-import ChangePasswordModal from "../../components/changePassword/ChangePasswordModal";
+import ChangePasswordModal from "../../components/UpdateDetailsModal/ChangePasswordModal";
+import EditProfileMOdal from "../../components/UpdateDetailsModal/EditProfileMOdal";
 
 const UserProfilePage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -11,6 +12,11 @@ const UserProfilePage = () => {
   // pop up modal
   const handleOnShow = () => setShowModal(true);
   const handleOnClose = () => setShowModal(false);
+
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  const handleEditShow = () => setShowEditModal(true);
+  const handleEditClose = () => setShowEditModal(false);
 
   const BACKEND_URL = import.meta.env.VITE_BASE_URl || "http://localhost:8000";
   const { user } = useSelector((state) => state.userInfo);
@@ -109,7 +115,7 @@ const UserProfilePage = () => {
         </Row>
 
         <div className="mt-4">
-          <Button variant="primary" className="me-3">
+          <Button variant="primary" className="me-3" onClick={handleEditShow}>
             Edit Profile
           </Button>
           <Button variant="warning" onClick={handleOnShow}>
@@ -118,6 +124,7 @@ const UserProfilePage = () => {
         </div>
       </Card>
       <ChangePasswordModal show={showModal} onHide={handleOnClose} />
+      <EditProfileMOdal show={showEditModal} onHide={handleEditClose} />
     </div>
   );
 };

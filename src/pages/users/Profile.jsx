@@ -1,8 +1,8 @@
 import React from "react";
 
-import AdminProfile from "../../components/changePassword/AdminProfile";
 import { useSelector } from "react-redux";
 import UserProfilePage from "./UserProfilePage";
+import AdminProfile from "../../components/UpdateDetailsModal/AdminProfile";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.userInfo);
