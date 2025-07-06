@@ -75,7 +75,7 @@ const EditProfileMOdal = ({ show, onHide }) => {
               />
             </Form.Group>
 
-            <Button variant="dark" type="submit">
+            <Button variant="dark" type="submit" className="w-100 mt-4">
               Save Changes
             </Button>
           </Form>

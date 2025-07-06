@@ -24,14 +24,21 @@ const SignUpPage = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
-    // destructure names from form
-    const { confirmPassword, ...rest } = form;
-    if (confirmPassword !== rest.password) return alert("Password dont match");
-    setIsLoading(true);
-    const result = await signUpApi(rest);
+    try {
+      // destructure names from form
+      const { confirmPassword, ...rest } = form;
+      if (confirmPassword !== rest.password)
+        return alert("Password dont match");
+      setIsLoading(true);
+      const result = await signUpApi(rest);
 
-    result.status === "success" && setForm(initialState);
-    setIsLoading(false);
+      result.status === "success" && setForm(initialState);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <div className="d-flex justify-content-center align-items-center signup-wrapper">

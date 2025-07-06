@@ -99,7 +99,7 @@ const BorrowTable = ({ admin }) => {
                 <td>
                   {" "}
                   <img
-                    src={import.meta.env.VITE_BASE_URl + thumbnail.slice(6)}
+                    src={import.meta.env.VITE_BASE_URl + thumbnail?.slice(6)}
                     width="50"
                     alt="image"
                   />
