@@ -1,7 +1,7 @@
 import React from "react";
 
 import { formatDistanceToNow } from "date-fns";
-import Star from "../../../components/star/star";
+import Star from "../../../components/star/StarAvg";
 
 const Reviews = ({ reviewsArr }) => {
   return (

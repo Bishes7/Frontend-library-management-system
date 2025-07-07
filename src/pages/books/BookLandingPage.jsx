@@ -16,7 +16,7 @@ import { getOnlySelectedBook } from "../../features/books/bookAction";
 import Reviews from "./reviews/Reviews";
 import { setCartItem } from "../../features/cart/cartSlice";
 import { toast } from "react-toastify";
-import Star from "../../components/star/Star.jsx";
+import StarAvg from "../../components/star/StarAvg";
 
 const BookLandingPage = () => {
   const { slug } = useParams();
@@ -123,7 +123,7 @@ const BookLandingPage = () => {
                   </div>
                   <div className="my-2">
                     <span>{selectedBook.genre}</span>
-                    <Star avgRating={avgRating} />
+                    <StarAvg avgRating={avgRating} />
                   </div>
                   <div>{selectedBook.description.slice(0, 300)}...</div>
                 </div>
