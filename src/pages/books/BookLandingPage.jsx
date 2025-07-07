@@ -12,10 +12,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getOnlySelectedBook } from "../../features/books/bookAction";
-import Star from "../../components/star/Star";
+
 import Reviews from "./reviews/Reviews";
 import { setCartItem } from "../../features/cart/cartSlice";
 import { toast } from "react-toastify";
+import Star from "../../components/star/Star";
 
 const BookLandingPage = () => {
   const { slug } = useParams();
