@@ -16,7 +16,7 @@ import { getOnlySelectedBook } from "../../features/books/bookAction";
 import Reviews from "./reviews/Reviews";
 import { setCartItem } from "../../features/cart/cartSlice";
 import { toast } from "react-toastify";
-import Star from "../../components/star/Star";
+import Star from "../../components/star/Star.jsx";
 
 const BookLandingPage = () => {
   const { slug } = useParams();
