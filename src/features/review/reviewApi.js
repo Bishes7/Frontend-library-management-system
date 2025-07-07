@@ -39,3 +39,15 @@ export const updateReviewApi = async (payload) => {
   const result = await apiConnector(obj);
   return result;
 };
+
+// Delete Review
+export const deletedReviewApi = async (id) => {
+  const obj = {
+    url: `${reviewApi}/${id}`,
+    method: "delete",
+    isPrivateRoute: true,
+    showToast: true,
+  };
+  const result = await apiConnector(obj);
+  return result;
+};

@@ -21,7 +21,7 @@ const BookLandingPage = () => {
   const { slug } = useParams();
   const dispatch = useDispatch();
 
-  const [showImg, setShowImg] = useState(0);
+  const [showImg, setShowImg] = useState(1);
   const [loader, setLoader] = useState(true);
 
   const { selectedBook } = useSelector((state) => state.bookInfo);
@@ -55,6 +55,8 @@ const BookLandingPage = () => {
 
   const avgRating =
     bookReviews.reduce((acc, r) => acc + r.rating, 0) / bookReviews.length || 0;
+
+  console.log("🧠 imageList:", selectedBook.imageList);
 
   if (loader) {
     return (
@@ -108,18 +110,7 @@ const BookLandingPage = () => {
                   className="h-100 w-100 object-fit-contain"
                 />
               </div>
-              <div className="d-flex overflow-auto gap-2 py-2">
-                {selectedBook.imageList?.map((url, i) => (
-                  <img
-                    src={import.meta.env.VITE_BASE_URl + url?.slice(6)}
-                    key={url}
-                    width={"70px"}
-                    className="img-thumbnail"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setShowImg(i)}
-                  />
-                ))}
-              </div>
+              <div className="d-flex overflow-auto gap-2 py-2"></div>
             </Col>
 
             <Col>

@@ -60,7 +60,12 @@ const CartPage = () => {
                         src={
                           import.meta.env.VITE_BASE_URl + book.imgUrl.slice(6)
                         }
-                        alt=""
+                        alt={book.title}
+                        style={{
+                          width: "80px",
+                          height: "auto",
+                          objectFit: "contain",
+                        }}
                       />
                     </td>
                     <td>{book.title}</td>

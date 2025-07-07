@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -14,24 +14,20 @@ import ReviewForm from "../forms/ReviewForm";
 
 const BorrowTable = ({ admin }) => {
   const dispatch = useDispatch();
-
   const location = useLocation();
   const pathname = location.pathname;
 
-  // useSelector
   const { allBorrows, myBorrows } = useSelector((state) => state.borrowInfo);
-
   const borrowSource = admin ? allBorrows : myBorrows;
 
-  // useEffect to show books on first render
+  const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     dispatch(getAllBorrows(admin));
   }, [dispatch, admin]);
 
-  // function to filter the boooks based on value
-
   const handleOnSearch = (e) => {
-    e.preventDefault();
+    setSearchTerm(e.target.value.toLowerCase());
   };
 
   const handleOnBookReturn = (_id) => {
@@ -48,22 +44,31 @@ const BorrowTable = ({ admin }) => {
     dispatch(setModalShow(true));
   };
 
+  const filteredBorrows = borrowSource.filter((item) =>
+    item.bookTitle?.toLowerCase().includes(searchTerm)
+  );
+
   return (
     <div>
       <div className="d-flex justify-content-between">
         <div className="text-secondary fw-bold">
-          {borrowSource.length} books found
+          {filteredBorrows.length} books found
         </div>
         <div className="mb-4">
-          <Form.Control placeholder="Search Books" onChange={handleOnSearch} />
+          <Form.Control
+            placeholder="Search Books"
+            value={searchTerm}
+            onChange={handleOnSearch}
+          />
         </div>
       </div>
+
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
-            <th>Due Date </th>
-            <th>Return Date </th>
+            <th>Due Date</th>
+            <th>Return Date</th>
             {!pathname.includes("my-borrow") && <th>Status</th>}
             <th>Thumbnail</th>
             <th>Title</th>
@@ -71,7 +76,7 @@ const BorrowTable = ({ admin }) => {
           </tr>
         </thead>
         <tbody>
-          {borrowSource.map(
+          {filteredBorrows.map(
             (
               {
                 bookTitle,
@@ -97,28 +102,31 @@ const BorrowTable = ({ admin }) => {
                   </td>
                 )}
                 <td>
-                  {" "}
                   <img
-                    src={import.meta.env.VITE_BASE_URl + thumbnail?.slice(6)}
+                    src={
+                      thumbnail
+                        ? import.meta.env.VITE_BASE_URl + thumbnail?.slice(6)
+                        : "/default-thumbnail.png"
+                    }
                     width="50"
-                    alt="image"
+                    alt="thumbnail"
                   />
                 </td>
                 <td>
-                  {" "}
-                  <a href={`/book/${bookSlug}`} target="_blank">
+                  <a
+                    href={`/book/${bookSlug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {bookTitle}
                   </a>
                 </td>
-
                 {!admin && (
                   <td>
                     {!isReturned && (
                       <Button
                         variant="warning"
-                        onClick={() => {
-                          handleOnBookReturn(_id);
-                        }}
+                        onClick={() => handleOnBookReturn(_id)}
                       >
                         Return Book
                       </Button>

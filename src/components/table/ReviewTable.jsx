@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { updateSelectedReviews } from "../../features/review/reviewAction";
+import {
+  fetchAllReviews,
+  updateSelectedReviews,
+} from "../../features/review/reviewAction";
+import { deletedReviewApi } from "../../features/review/reviewApi";
+import { toast } from "react-toastify";
 
 export const ReviewTable = () => {
   const dispatch = useDispatch();
@@ -11,6 +16,10 @@ export const ReviewTable = () => {
   const [displayReview, setDisplayReview] = useState([]);
 
   useEffect(() => {
+    dispatch(fetchAllReviews());
+  }, [dispatch]);
+
+  useEffect(() => {
     setDisplayReview(reviews);
   }, [reviews]);
 
@@ -18,6 +27,18 @@ export const ReviewTable = () => {
   const handleOnStatusUpdate = (obj) => {
     if (confirm("Do you want to change the status of review")) {
       dispatch(updateSelectedReviews(user?.role === "admin", obj));
+    }
+  };
+
+  const handleDeleteReview = async (id) => {
+    if (confirm("Are you sure you want to delete the review")) {
+      try {
+        const response = await deletedReviewApi(id);
+        const { status, message } = response;
+        status === "success" && toast[status](message);
+      } catch (error) {
+        console.error(error.message);
+      }
     }
   };
 
@@ -71,7 +92,12 @@ export const ReviewTable = () => {
                   <div>Message:{reviewMessage}</div>
                   <div>Ratings:{rating}</div>
                   <div>
-                    <Button variant="danger">Delete</Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDeleteReview(_id)}
+                    >
+                      Delete
+                    </Button>
                   </div>
                 </td>
               </tr>

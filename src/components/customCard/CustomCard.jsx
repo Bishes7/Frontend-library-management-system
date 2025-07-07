@@ -37,11 +37,11 @@ export const CustomList = ({
   return (
     <Card>
       <div>
-        <div className="Shadow d-flex gap-3">
+        <div className="Shadow d-flex gap-3 align-items-start">
           <Card.Img
             variant="top"
             src={import.meta.env.VITE_BASE_URl + imgUrl?.slice(6)}
-            height={"200px"}
+            style={{ width: "120px", height: "auto", objectFit: "cover" }}
           />
           <Card.Body>
             <Card.Title>{title}</Card.Title>
