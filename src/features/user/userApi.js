@@ -1,7 +1,7 @@
 import { apiConnector } from "../../services/apiConnector";
 
 // call apiConnector to fetch the data
-const apiBaseUrl = import.meta.env.VITE_BASE_URl;
+const apiBaseUrl = import.meta.env.VITE_BASE_URL;
 const userApi = apiBaseUrl + "/api/v1/user";
 
 export const fetchUserApi = async () => {

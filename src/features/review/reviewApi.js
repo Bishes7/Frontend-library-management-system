@@ -1,6 +1,6 @@
 import { apiConnector } from "../../services/apiConnector";
 
-const apiBaseUrl = import.meta.env.VITE_BASE_URl;
+const apiBaseUrl = import.meta.env.VITE_BASE_URL;
 const reviewApi = apiBaseUrl + "/api/v1/reviews";
 
 export const reviewApiEp = async (payload) => {

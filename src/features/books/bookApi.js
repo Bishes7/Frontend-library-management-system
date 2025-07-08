@@ -1,9 +1,8 @@
 // call apiConnector to fetch the data
 
-import { useEffect } from "react";
 import { apiConnector } from "../../services/apiConnector";
 
-const apiBaseUrl = import.meta.env.VITE_BASE_URl;
+const apiBaseUrl = import.meta.env.VITE_BASE_URL;
 
 const bookApi = apiBaseUrl + "/api/v1/books";
 
