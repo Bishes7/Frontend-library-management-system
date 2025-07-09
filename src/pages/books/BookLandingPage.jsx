@@ -104,10 +104,15 @@ const BookLandingPage = () => {
               <div className="mb-3" style={{ height: "400px" }}>
                 <img
                   src={
-                    import.meta.env.VITE_BASE_URl +
-                    selectedBook?.imageList[showImg].slice(6)
+                    selectedBook?.imageList?.[showImg]
+                      ? `${
+                          import.meta.env.VITE_BASE_URL
+                        }${selectedBook.imageList[showImg]
+                          .replace("public", "")
+                          .replace(/\\/g, "/")}`
+                      : "/default-thumbnail.png"
                   }
-                  alt={selectedBook.title}
+                  alt={selectedBook?.title}
                   className="h-100 w-100 object-fit-contain"
                 />
               </div>
