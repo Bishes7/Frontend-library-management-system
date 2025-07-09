@@ -8,7 +8,7 @@ export const CustomCard = ({ imgUrl, title, year, slug, author }) => {
     <Card className="shadow" style={{ width: "16rem" }}>
       <Card.Img
         variant="top"
-        src={import.meta.env.VITE_BASE_URl + imgUrl?.slice(6)}
+        src={`${import.meta.env.VITE_BASE_URL}${imgUrl}`}
         width="50"
         alt="image"
       />
