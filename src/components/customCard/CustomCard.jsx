@@ -1,7 +1,3 @@
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
-
 // For the card View
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
