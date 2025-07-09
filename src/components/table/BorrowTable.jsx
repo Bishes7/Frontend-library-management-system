@@ -102,18 +102,12 @@ const BorrowTable = ({ admin }) => {
                   </td>
                 )}
                 <td>
-                  const cleanedThumb = thumbnail?.replace("public",
-                  "").replace(/\\/g, "/");
                   <img
-                    src={
-                      thumbnail
-                        ? `${import.meta.env.VITE_BASE_URL}${thumbnail
-                            .replace("public", "")
-                            .replace(/\\/g, "/")}`
-                        : "/default-thumbnail.png"
-                    }
-                    width="50"
-                    alt="thumbnail"
+                    src={`${import.meta.env.VITE_BASE_URL}/${thumbnail
+                      ?.replace("public", "")
+                      .replace(/\\/g, "/")}`}
+                    alt="book-thumbnail"
+                    style={{ width: "60px" }}
                   />
                 </td>
                 <td>
