@@ -69,7 +69,13 @@ const BookTable = () => {
                 <td>
                   {" "}
                   <img
-                    src={import.meta.env.VITE_BASE_URl + imgUrl.slice(6)}
+                    src={
+                      imgUrl
+                        ? `${import.meta.env.VITE_BASE_URL}${imgUrl
+                            .replace("public", "")
+                            .replace(/\\/g, "/")}`
+                        : "/default-thumbnail.png"
+                    }
                     width="50"
                     alt="image"
                   />
