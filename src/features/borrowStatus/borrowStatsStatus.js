@@ -1,6 +1,6 @@
 import { apiConnector } from "../../services/apiConnector";
 
-const borrowStatsAPi = import.meta.env.VITE_BASE_URL;
+const borrowStatsAPi = import.meta.env.VITE_BASE_URL + "/api/stats";
 
 // api to fetch borrow chart status
 export const fetchborrowChartStatus = async () => {
