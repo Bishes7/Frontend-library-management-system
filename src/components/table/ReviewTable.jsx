@@ -69,7 +69,11 @@ export const ReviewTable = () => {
                   <div>
                     <img
                       src={
-                        import.meta.env.VITE_BASE_URl + bookId?.imgUrl?.slice(6)
+                        bookId?.imgUrl
+                          ? `${import.meta.env.VITE_BASE_URL}${bookId.imgUrl
+                              .replace("public", "")
+                              .replace(/\\/g, "/")}`
+                          : "/default-thumbnail.png"
                       }
                       width="150"
                       alt="image"
