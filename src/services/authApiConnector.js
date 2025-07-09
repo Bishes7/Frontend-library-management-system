@@ -2,7 +2,8 @@
 
 import { apiConnector } from "./apiConnector";
 
-const baseUrl = "http://localhost:8000";
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 const authApi = baseUrl + "/api/v1/auth";
 
 // Sign Up API
