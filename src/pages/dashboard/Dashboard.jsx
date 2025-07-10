@@ -11,6 +11,7 @@ import UserDashboardContent from "../../features/user/UserDashboardContent";
 export const Dashboard = () => {
   const { user } = useSelector((state) => state.userInfo);
   const isAdmin = user?.role === "admin";
+  const isDemo = user?.isDemo;
 
   return (
     <div className="container mt-2 fade-in">
@@ -25,6 +26,12 @@ export const Dashboard = () => {
             }}
           />
         </h3>
+        {isDemo && (
+          <div className="alert alert-warning text-center mt-3">
+            ⚠️ You are in <strong>Demo Mode</strong>. All critical actions are
+            disabled.
+          </div>
+        )}
       </div>
 
       {isAdmin ? (

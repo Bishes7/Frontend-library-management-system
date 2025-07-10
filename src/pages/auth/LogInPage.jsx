@@ -138,6 +138,34 @@ const LogInPage = () => {
                         )}
                       </Button>
                     </div>
+                    <div className="d-grid mt-2">
+                      <Button
+                        variant="outline-secondary"
+                        onClick={async () => {
+                          setIsLoading(true);
+                          const { payload } = await logInUser({
+                            email: "demo.admin@lms.com",
+                            password: "Demo@Lms2025",
+                          });
+
+                          if (payload?.accessJWT) {
+                            localStorage.setItem(
+                              "refreshJWT",
+                              payload.refreshJWT
+                            );
+                            sessionStorage.setItem(
+                              "accessJWT",
+                              payload.accessJWT
+                            );
+                            dispatch(fetchUserAction());
+                          }
+
+                          setIsLoading(false);
+                        }}
+                      >
+                        🚀 Try as Demo Admin
+                      </Button>
+                    </div>
                   </Form>
 
                   <div className="text-center pt-3 fw-bold">
