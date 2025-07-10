@@ -18,7 +18,7 @@ const UserProfilePage = () => {
   const handleEditShow = () => setShowEditModal(true);
   const handleEditClose = () => setShowEditModal(false);
 
-  const BACKEND_URL = import.meta.env.VITE_BASE_URl || "http://localhost:8000";
+  const BACKEND_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8000";
   const { user } = useSelector((state) => state.userInfo);
   const fileInputRef = useRef();
   const [imagePreview, setImagePreview] = useState(
