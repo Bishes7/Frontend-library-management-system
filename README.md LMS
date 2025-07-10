@@ -1,0 +1,99 @@
+# 📚 Library Management System – Frontend (React.js)
+
+This is the **frontend** of my full-stack **Library Management System** project, built using **React, Redux Toolkit, and Bootstrap**. The app is designed for both users and admins to manage book borrowing, reviews, and analytics in a clean and responsive UI.
+
+---
+
+##  Live App
+
+ [👉 View Live App Here](https://frontend-library-management-system.vercel.app/)
+
+ **Demo Admin Login:**
+- Email: demo.admin@lms.com 
+- Password: Demo@Lms2025
+
+Or just click the **"Try as Demo Admin"** button on the login page!
+
+---
+
+##  Tech Stack (Frontend)
+
+- **React.js**
+- **Redux Toolkit**
+- **React Router**
+- **React Bootstrap**
+- **Chart.js**
+- **Axios**
+- **Typewriter Effect**
+
+---
+
+##  Key Features
+
+###  User Features:
+- Register and login
+- Browse and borrow books
+- View borrowed books
+- Submit and view reviews
+- Add/Edit profile picture
+
+### 🛠 Admin Features:
+- Dashboard with charts and summaries
+- Add/edit/delete books (protected)
+- Manage user reviews
+- View borrowing stats by week/category
+- Promote/Demote/Delete Users
+
+### 🧪 Demo Mode:
+- Safe login with restricted permissions
+- **Delete/edit/book actions disabled**
+- Warning banner and disabled buttons for visual feedback
+
+---
+
+## 📸 Screenshots
+
+![login](https://github.com/user-attachments/assets/1c38e37f-55af-4610-bb18-6fa4516f161f)
+![profile](https://github.com/user-attachments/assets/15dad340-a3ba-42cb-be9c-13009c641055)
+![dashboard](https://github.com/user-attachments/assets/8dec9cbf-b44d-4d0f-87a9-efa777d2a6e9)
+
+
+
+## Folder Structure
+├── components/ # Reusable UI components
+
+├── features/ # Redux features (auth, user, books, reviews)
+
+├── pages/ # Route-level pages (Login, Dashboard, etc.)
+
+├── services/ # API connectors (Axios logic)
+
+├── redux/ # Store config and slices
+
+├── utils/ # Helpers (e.g. Password Validation, Toast)
+
+└── App.js # Route definitions
+
+##  How to Run Locally
+bash
+# Clone the repo
+git clone https://github.com/Bishes7/Frontend-library-management-system.git
+
+# Install dependencies
+cd Frontend-library-management-system
+npm install
+
+# Start dev server
+npm run dev
+
+ Author
+
+ Bishes Adhikari
+ Based in Sydney, Australia
+ Aspiring Full Stack Developer
+ LinkedIn- https://www.linkedin.com/in/bishes-adhikari/
+ specialbishes9@gmail.com
+
+Support
+If you like this project, feel free to star it ⭐ or share it with others!
+
